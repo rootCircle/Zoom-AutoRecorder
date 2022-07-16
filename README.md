@@ -4,7 +4,13 @@
 Zoom Recorder is free and open-source Python based GUI operated screen recorder and scheduler for zoom meetings.
 It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with added GUI and reduced bugs.
 
-# Requirements
+### Preview
+![HomePage](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/1.png)
+![Service View Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/2.png)
+![Meeting Loading Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/3.png)
+
+
+### Requirements
 1. [OBS Studio](https://obsproject.com/) installed at default install location.
 
 2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is only required only for initial run not regularly. Just User don't have to interfere in "Zoom Meet" Profile afterwards
@@ -36,7 +42,7 @@ You can build your own executable by using pyinstaller or any other compiler tha
 pyinstaller --noconsole --windowed main.py
 ```
 
-### ⚠Warning
+### :warning: Warning
 - Since it is in early development phase it might be possible that app may not work at all. Feel free to report any bugs if it exists.
 - I admit that UI for loading Service screen is a bit unresponsive on starting service which may be resolved in later updates.
 
