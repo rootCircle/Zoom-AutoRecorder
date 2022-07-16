@@ -901,7 +901,7 @@ class LoadService(tk.Frame):
 # Main Program
 if __name__ == "__main__":
     app = App()
-    app.title("Kans:Your Shopping Partner")
+    app.title("Zoom AutoRecorder")
     app.resizable(0, 0)
     app.update_idletasks()
     x_Left = int(app.winfo_screenwidth() / 4)
