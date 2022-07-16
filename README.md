@@ -5,9 +5,9 @@ Zoom Recorder is free and open-source Python based GUI operated screen recorder 
 It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with added GUI and reduced bugs.
 
 ### Preview
-![HomePage](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/1.png)
-![Service View Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/2.png)
-![Meeting Loading Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/3.png)
+![HomePage](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/main/docs/1.png)
+![Service View Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/main/docs/2.png)
+![Meeting Loading Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/main/docs/3.png)
 
 ### Download
 [<img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"
