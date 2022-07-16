@@ -47,7 +47,7 @@ You can build your own executable by using pyinstaller or any other compiler tha
 pyinstaller --noconsole --windowed main.py
 ```
 
-### :warning: Warning
+### ⚠ Warning
 - Since it is in early development phase it might be possible that app may not work at all. Feel free to report any bugs if it exists.
 - I admit that UI for loading Service screen is a bit unresponsive on starting service which may be resolved in later updates.
 
