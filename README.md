@@ -9,6 +9,11 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 ![Service View Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/2.png)
 ![Meeting Loading Page](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/gh-pages/3.png)
 
+### Download
+[<img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"
+     alt="Download from GitHub"
+     height="60">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/releases)
+
 
 ### Requirements
 1. [OBS Studio](https://obsproject.com/) installed at default install location.
