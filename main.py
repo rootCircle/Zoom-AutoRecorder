@@ -1,6 +1,9 @@
 """
 Fixed scrolling in linux (cross compatible maybe)
 
+In linux bashCommand uses software encoding
+which may be corrected by removing 'env LIBGL_ALWAYS_SOFTWARE=1'
+I haven't removed that because my GPU is not compatible with OBS Studio
 """
 
 LOG_FILE_FOLDER = "res"
@@ -35,14 +38,14 @@ Importing various libraries
 """
 try:
     import tkinter as tk
-    from tkinter import messagebox, Radiobutton, PhotoImage, StringVar, filedialog, ttk, simpledialog
-    import tkinter.font as tkFont
+    from tkinter import messagebox, PhotoImage, StringVar, ttk
     from PIL import Image, ImageTk
     import time
     import sqlite3
     import subprocess
     import math
     import platform
+    import threading
 except Exception as ex:
     try:
         os.makedirs(LOG_FILE_FOLDER)
@@ -64,6 +67,135 @@ DEFAULTIMAGEDir = os.path.join("data", "Additem.png")
 HOMEPAGEImgDir = os.path.join("data", "logo.png")
 
 CHOOSENMEETDATA = {}
+
+LOADING_SCREENS = []
+LOADING_GIF = os.path.join("data", "Loading.gif")
+
+LeastWaitTime = 0.5  # in second(min time for loading)
+
+class LoadingPage(tk.Label):
+    """
+    Doesn't support non-void function as its return is not synchronised
+    """
+
+    def __init__(self, master, filename):
+        try:
+            im = Image.open(filename)
+            seq = []
+            try:
+                while 1:
+                    seq.append(im.copy())
+                    im.seek(len(seq))  # skip to next frame
+            except EOFError:
+                pass  # we're done
+
+            try:
+                self.delay = im.info['duration']
+            except KeyError:
+                self.delay = 100
+
+            first = seq[0].convert('RGBA')
+            self.frames = [ImageTk.PhotoImage(first)]
+
+            tk.Label.__init__(self, master, image=self.frames[0])
+
+            temp = seq[0]
+            for image in seq[1:]:
+                temp.paste(image)
+                frame = temp.convert('RGBA')
+                self.frames.append(ImageTk.PhotoImage(frame))
+
+            self.idx = 0
+
+            self.cancel = self.after(self.delay, self.play)
+        except FileNotFoundError as e:
+            Apptools.writeLog("File not found\nQuit Module Use" + str(e))
+            os._exit(0)
+
+    def play(self):
+        try:
+            self.config(image=self.frames[self.idx])
+            self.idx += 1
+            if self.idx == len(self.frames):
+                self.idx = 0
+            self.cancel = self.after(self.delay, self.play)
+        except Exception as e:
+            Apptools.writeLog(e)
+
+    def start(self, grab=True):
+        """
+        grab will set toplevel active and root window inactive
+        """
+        try:
+            if not LOADING_SCREENS:
+                screen_width = self.winfo_screenwidth()
+                screen_height = self.winfo_screenheight()
+                gifhalfdimension = [50, 50]
+                LOADING_SCREENS.append(tk.Toplevel(self))
+                screen = LOADING_SCREENS[-1]
+                try:
+                    screen.wm_overrideredirect(True)
+                except:
+                    screen.overrideredirect(True)
+
+                # Eval is threading Unsafe
+                # self.eval(f'tk::PlaceWindow {str(screen)} center')
+
+                # x = self.winfo_x()
+                # y = self.winfo_y()
+
+                screen.geometry(
+                    "+%d+%d" % (screen_width // 2 - gifhalfdimension[0], screen_height - 3 * gifhalfdimension[1]))
+                screen.lift()
+                screen.resizable(0, 0)
+                if grab:
+                    screen.grab_set()
+                LoadingPage.anim = LoadingPage(screen, LOADING_GIF)
+                LoadingPage.anim.pack()
+            else:
+                time.sleep(0.1)
+                LoadingPage.start(self, grab)
+        except RecursionError as e:
+            Apptools.writeLog(e)
+
+    def stop_it(self):
+        try:
+            if LOADING_SCREENS:
+                try:
+                    screen = LOADING_SCREENS[-1]
+                    LoadingPage.anim.after_cancel(LoadingPage.anim.cancel)
+                    screen.destroy()
+                    del LOADING_SCREENS[-1]
+                except IndexError as er:
+                    Apptools.writeLog(er)
+                    globals()['LOADING_SCREENS'] = []
+            else:
+                time.sleep(0.1)  # To avoid collission with other function calls
+                LoadingPage.stop_it(self)
+        except RecursionError as e:
+            Apptools.writeLog(e)
+
+    def perform(self, args):
+        """
+        args should include destination function
+        order of args(root ,function,arguments)
+        """
+        t1 = threading.Thread(target=LoadingPage.start, args=(self,))
+        t1.start()
+        t2 = threading.Thread(target=LoadingPage.fxn, args=args)
+        t2.start()
+
+    def fxn(self, *args):
+        t1 = time.time()
+        function = args[0]
+        arguments = args[1:]
+        function(*arguments)
+        t2 = time.time()
+
+        diff = round(t2 - t1, 1)
+        if diff < LeastWaitTime:
+            time.sleep(LeastWaitTime - diff)
+        LoadingPage.stop_it(self)
 
 
 class Apptools:
@@ -579,7 +711,7 @@ class LoadService(tk.Frame):
             console.config(text=consoleText)
 
         btn = tk.Button(self, text="Start Service",
-                        command=lambda: self.service(MeetLink, timeRange, console, consoleText))
+                        command=lambda: self.processing(MeetLink, timeRange, console, consoleText))
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=6, column=0, padx=5, pady=10)
 
@@ -593,31 +725,73 @@ class LoadService(tk.Frame):
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=8, column=0, padx=5, pady=10)
 
+        lbl = tk.Label(self, text="If you close the app even then OBS Studio recording "
+                                  "will continue \nif initiated. (to avoid conflict of interest)"
+                                  "\nYou need to manually close it or after a pre-assigned value"
+                                  " decided by threading module.\n"
+                                  "(NEEDS PROPER REVIEW)")
+        lbl.config(font=("Segoe UI", 10), fg="#E8E8E8", bg="#333333")
+        lbl.grid(row=9, column=0, sticky='ew')
+
+    def processing(self, *args):
+        LoadingPage.perform(self, (self, self.service, *args))
+
     def service(self, MeetLink, timeRange, console, consoleText):
         if MeetLink and timeRange:
             consoleText += "\nInitialising Service"
             console.config(text=consoleText)
+            
             currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
+            
+            print("\n\n1Starting Service\n\n")
+            counter = True
             while currentTime <= timeRange[0][1]:
-                if currentTime >= timeRange[0][0]:
+                currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
+                print("\n\n2Inside Loop\n\n")
+                if timeRange[0][0] <= currentTime <= timeRange[0][1]:
+                    if counter:
+                        print("\n\nOBS\n\n")
+                        counter = False
+                        t3 = threading.Thread(target=LoadService.launchRecordingbyOBS, args=(self,))
+                        t3.start()
+                
+                    print("\n\n2.5Inside Loop\n\n")
                     if self.launchMeeting(MeetLink, timeRange):
+                        print("\n\n3Meeting is on!\n\n")
                         rejoinInterval = CHOOSENMEETDATA['rejoinInterval']
-                        sleepDuration = int(rejoinInterval) \
-                            if Apptools.check_digit(rejoinInterval) and int(rejoinInterval) >0 \
-                            else int(CHOOSENMEETDATA['meetLength'])
+                        if Apptools.check_digit(rejoinInterval) and int(rejoinInterval) > 0:
+                            rejoinInterval = int(rejoinInterval)
+                            rejoinTimeLength = rejoinInterval - (currentTime - timeRange[0][0])%rejoinInterval
+                        else:
+                            rejoinTimeLength = 0
+                        timeLeft = timeRange[0][1] - currentTime
+                        
+                        sleepDuration = rejoinTimeLength if rejoinTimeLength>0 else timeLeft
 
                         time.sleep(sleepDuration * 60)
                     else:
+                        print("\n\n4Sleeping is on!\n\n")
+                        
                         updateFrequency = int(CHOOSENMEETDATA['updateFrequency'])
                         consoleText += "\nError! Retrying after some time" \
                                        "\nSleeping for another {} minutes".format(updateFrequency)
                         console.config(text=consoleText)
+                        
                         time.sleep(updateFrequency * 60)
+                        
                     currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
                     endTime = timeRange[0][1]
+                    
                     if currentTime >= endTime:
-                        # os.system("taskkill /F /IM obs64.exe")
-                        break
+                        self.endOBSRecording()
+                        consoleText += "\nMeeting Ended!"
+                        console.config(text=consoleText)
+
+                        lbl = tk.Label(self, text="Rate Your Experience🟊")
+                        lbl.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
+                        lbl.grid(row=3, column=0, sticky='ew')
+
+                        return
                 else:
                     updateFrequency = int(CHOOSENMEETDATA['updateFrequency'])
                     consoleText += "\n Sleeping for another {} minutes".format(updateFrequency)
@@ -626,6 +800,10 @@ class LoadService(tk.Frame):
             else:
                 consoleText += "\nOut of Service\nIf that's a possible error retry after some time"
                 console.config(text=consoleText)
+
+                lbl = tk.Label(self, text="Meeting Ended possibly!")
+                lbl.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
+                lbl.grid(row=3, column=0, sticky='ew')
 
     def createMeetLink(self, meetID, meetPassword = ""):
         # Creates zoommtg link doesn't require browser permission (more safe.Hope so!)
@@ -689,7 +867,6 @@ class LoadService(tk.Frame):
             consoleText += "\n Launching Meeting"
             serviceConsole.config(text=consoleText)
             self.launchZoommtgUrl(MeetLink)
-            self.launchRecordingbyOBS()
             return True
         return False
 
@@ -707,6 +884,18 @@ class LoadService(tk.Frame):
             os.system(bashCommand)
         except Exception as e:
             messagebox.showerror("Error",e)
+
+    def endOBSRecording(self):
+        try:
+            if platform.system() == 'Linux':
+                bashCommand = "killall -9 obs"
+            elif platform.system() == 'Windows':
+                bashCommand = "taskkill /F /IM obs64.exe"
+            else:
+                raise "Unsupported OS"
+            os.system(bashCommand)
+        except Exception as e:
+            messagebox.showerror("Error", e)
 
 
 # Main Program
