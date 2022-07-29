@@ -594,7 +594,7 @@ class ViewService(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master, bg="#333333")
         style = ThemedStyle(self)
-        style.set_theme("default")
+        style.set_theme("black")
         self.makeWidgets(master)
 
     def makeWidgets(self, master):
