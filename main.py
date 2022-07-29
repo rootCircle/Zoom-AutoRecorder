@@ -74,6 +74,8 @@ CHOOSENMEETDATA = {}
 LOADING_SCREENS = []
 LOADING_GIF = os.path.join(os.path.dirname(__file__), "data", "Loading.gif")
 
+DATABASE = os.path.join(os.path.dirname(__file__), "res", "services.db")
+
 LeastWaitTime = 0.5  # in second(min time for loading)
 
 
@@ -212,7 +214,7 @@ class Apptools:
         """
         output = []
         try:
-            sqliteConnection = sqlite3.connect("services.db")
+            sqliteConnection = sqlite3.connect(DATABASE)
             cursor = sqliteConnection.cursor()
             for arguments in sqlite_query:
                 if isinstance(arguments, (list, tuple)):
