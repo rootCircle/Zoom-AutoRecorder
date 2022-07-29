@@ -49,11 +49,11 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 
 ### Build an executable
 You can build your own executable by using pyinstaller or any other compiler that you like
--UNIX based Systems(Linux,MacOS etc)
+- UNIX based Systems(Linux,MacOS etc)
 ```markdown
 pyinstaller --noconsole --windowed --add-data "data:data" -i"data/icon.ico" --collect-submodules PIL main.py
 ```
--Windows
+- Windows
 ```markdown
 pyinstaller --noconsole --windowed --add-data "data;data" -i"data/icon.ico" --collect-submodules PIL main.py
 ```
