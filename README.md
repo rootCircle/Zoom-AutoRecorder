@@ -24,16 +24,22 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 
 4. Python libraries : datetime, os, errno, sys, tkinter, PIL, time, sqlite3, subprocess, math, platform, webbrowser
   
-   (All libraries except PIL are installed by default in Python)
+   (All libraries except PIL,ttkthemes are installed by default in Python)
   
    PIL can be installed by using given commands in Terminal/CMD.
    ```markdown
    pip install pillow
    OR
    pip3 install pillow
+   
+   AND
+   
+   pip install ttkthemes
+   OR
+   pip3 install ttkthemes
    ```
   
-5. [Zoom Meeting](https://zoom.us/) App Installed
+5. [Zoom Meeting](https://zoom.us/) App Installed with disabled setting for camera on at autojoin and enabled for computer audio on autojoin.
 
 ### Notes
 - Recording is supported right now only in Linux and Windows
@@ -43,8 +49,13 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 
 ### Build an executable
 You can build your own executable by using pyinstaller or any other compiler that you like
+-UNIX based Systems(Linux,MacOS etc)
 ```markdown
-pyinstaller --noconsole --windowed main.py
+pyinstaller --noconsole --windowed --add-data "data:data" -i"data/icon.ico" --collect-submodules PIL main.py
+```
+-Windows
+```markdown
+pyinstaller --noconsole --windowed --add-data "data;data" -i"data/icon.ico" --collect-submodules PIL main.py
 ```
 
 ### ⚠ Warning
