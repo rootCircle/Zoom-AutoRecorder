@@ -67,4 +67,9 @@ pyinstaller --noconsole --windowed --add-data "data;data" -i"data/icon.ico" --co
 2. Debug the app
 3. Make app feel more responsive
 
+### Video
+[<img src="https://i.ytimg.com/vi/Tu31bdrZyW0/hqdefault.jpg"
+     alt="Zoom Recorder | Zoom Meeting Scheduler and Recorder | v0.3Alpha Walk-through | Python"
+     height="250">](https://www.youtube.com/watch?v=Tu31bdrZyW0)
+
 ### Thanks!
