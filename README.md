@@ -1,4 +1,4 @@
-## Zoom AutoRecorder
+## [Zoom AutoRecorder](https://microsoftlabs.github.io/Zoom-AutoRecorder/)
 
 ### Introduction
 Zoom Recorder is free and open-source Python based GUI operated screen recorder and scheduler for zoom meetings.
