@@ -965,7 +965,7 @@ class LoadService(tk.Frame):
                 messagebox.showerror("Error", e)
 
     def endOBSRecording(self, recordMeet='True'):
-        if recordMeet == True:
+        if recordMeet == 'True':
             try:
                 if platform.system() == 'Linux':
                     bashCommand = "killall -9 obs"
