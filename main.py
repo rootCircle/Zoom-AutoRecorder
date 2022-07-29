@@ -19,7 +19,7 @@ try:
     import errno
 
     try:
-        os.makedirs(LOG_FILE_FOLDER)
+        os.makedirs(os.path.join(os.path.dirname(__file__), LOG_FILE_FOLDER))
     except OSError as er:
         if er.errno != errno.EEXIST:
             print(er)
@@ -27,7 +27,7 @@ try:
     now = datetime.now()
     formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
 
-    LOG_FILE = os.path.join(LOG_FILE_FOLDER, "log.log")  # Log File init
+    LOG_FILE = os.path.join(os.path.dirname(__file__), LOG_FILE_FOLDER, "log.log")  # Log File init
 
     print(formatted_date, "============PROGRAM STARTS============", file=open(LOG_FILE, 'a'))
 except Exception as e:
@@ -65,14 +65,14 @@ except Exception as ex:
 """
 Image Files Directories
 """
-LOGOImgDir = os.path.join("data", "logonew.png")
-DEFAULTIMAGEDir = os.path.join("data", "Additem.png")
-HOMEPAGEImgDir = os.path.join("data", "logo.png")
+LOGOImgDir = os.path.join(os.path.dirname(__file__),"data", "logonew.png")
+DEFAULTIMAGEDir = os.path.join(os.path.dirname(__file__),"data", "Additem.png")
+HOMEPAGEImgDir = os.path.join(os.path.dirname(__file__),"data", "logo.png")
 
 CHOOSENMEETDATA = {}
 
 LOADING_SCREENS = []
-LOADING_GIF = os.path.join("data", "Loading.gif")
+LOADING_GIF = os.path.join(os.path.dirname(__file__), "data", "Loading.gif")
 
 LeastWaitTime = 0.5  # in second(min time for loading)
 
