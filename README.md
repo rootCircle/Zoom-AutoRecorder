@@ -105,9 +105,9 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
 3. Make app feel more responsive.
 
 ### Preview
-![HomePage](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/1.png)
-![Service View Page](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/2.png)
-![Meeting Loading Page](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/3.png)     
+[<img src="https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
+alt="Screenshot"
+height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs)
      
 ### Video
 [<img src="https://i.ytimg.com/vi/Tu31bdrZyW0/hqdefault.jpg"
