@@ -28,7 +28,7 @@ BOOM! You are ready to use this software like a champ!
 ### Requirements
 1. [OBS Studio](https://obsproject.com/) installed at default install location.
 
-2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is only required only for initial run not regularly. User just don't have to interfere in "Zoom Meet" Profile afterwards.
+2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is required only for initial run, not regularly. User just don't have to interfere in "Zoom Meet" Profile afterwards.
      - You can do a simple Google Search to know how to create a Scene in OBS Studio.
    
 3. [Python v3](https://www.python.org/)
@@ -93,7 +93,7 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
      TypeError: catching classes that do not inherit from BaseException is not allowed
      )
      ```
-- Novice Users are warned against using Nuitka build due to its comparatively more complex installation than pyinstaller and increased build size and present bugs in compiling the script on it.(Nuitka builds are performance-wise faster btw)
+- Novice Users are warned against using Nuitka build due to its comparatively more complex installation than pyinstaller and increased build size and present bugs in compiling the script on it. (Nuitka builds are performance-wise faster btw)
 
 ### ⚠ Warning
 - Since it is in early development phase it might be possible that app may not work at all. Feel free to report any bugs if it exists.
