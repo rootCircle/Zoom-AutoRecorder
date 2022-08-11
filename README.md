@@ -38,17 +38,17 @@ BOOM! You are ready to use this software like a champ!
    (All libraries except PIL,ttkthemes are installed by default in Python)
   
    PIL can be installed by using given commands in Terminal/CMD.
-     ```markdown
-        pip install pillow
-        OR
-        pip3 install pillow
-     ```
-     and
-     ```markdown
-        pip install ttkthemes
-        OR
-        pip3 install ttkthemes
-     ```
+   ```markdown
+   pip install pillow
+   OR
+   pip3 install pillow
+   ```
+   and
+   ```markdown
+   pip install ttkthemes
+   OR
+   pip3 install ttkthemes
+   ```
   
 5. [Zoom Meeting](https://zoom.us/) App Installed with disabled setting for camera on at autojoin and enabled setting for autojoin computer audio on joining meeting.
 
@@ -135,4 +135,5 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
      - [automaticZoomRecorder](https://github.com/royjan/automaticZoomRecorder)
      - [Zoom-Meeting-Recorder](https://github.com/MJovanovic40/Zoom-Meeting-Recorder)
      
+
 ### Thanks!
