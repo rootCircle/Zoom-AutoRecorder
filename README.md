@@ -48,7 +48,7 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 - Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it user may follow steps given in comments of main.py file.
 
 ### Build an executable
-You can build your own executable by using pyinstaller or any other compiler that you like
+You can build your own executable by using pyinstaller, nuitka or any other [compiler](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_comparisons.html) that you like
 - UNIX based Systems(Linux,MacOS etc)
 ```markdown
 pyinstaller --noconsole --windowed --add-data "data:data" -i"data/icon.ico" --collect-submodules PIL main.py
@@ -57,6 +57,23 @@ pyinstaller --noconsole --windowed --add-data "data:data" -i"data/icon.ico" --co
 ```markdown
 pyinstaller --noconsole --windowed --add-data "data;data" -i"data/icon.ico" --collect-submodules PIL main.py
 ```
+- Any OS(es) [Not Recommended to Novice Users] 
+{Unstable;Contains Bug}
+```markdown
+python3 -m nuitka --standalone --nofollow-imports --remove-output --no-pyi-file --include-package=PIL --include-module=ttkthemes --output-dir=app_build --enable-plugin=tk-inter --onefile --include-data-dir=data=data --windows-icon-from-ico=data/icon.ico main.py
+```
+
+### Workaround for Nuitka Build
+After building the binary, copy 'ttkthemes' folder from site-packages folder(in lib directory) from your standard python installation location, to remove importing issue.
+- To run the binary, open terminal in <Project-location>/app_build/main.dist directory then type and run main.exe or ./main depending on your OS.
+
+- Running may give a error after the app window is closed.(Any Suggestion/Workaround on this are welcome)
+     ```
+     ............/zoomRecorder/build3/main.dist/tkinter/__init__.py", line 4025, in __del__
+     TypeError: catching classes that do not inherit from BaseException is not allowed
+     )
+     ```
+- Novice Users are warned against using Nuitka build due to its comparatively more complex installation than pyinstaller and increased build size and present bugs in compiling the script on it.(Nuitka builds are performance-wise faster btw)
 
 ### ⚠ Warning
 - Since it is in early development phase it might be possible that app may not work at all. Feel free to report any bugs if it exists.
