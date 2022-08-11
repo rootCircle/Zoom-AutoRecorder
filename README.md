@@ -88,5 +88,25 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
 [<img src="https://i.ytimg.com/vi/Tu31bdrZyW0/hqdefault.jpg"
      alt="Zoom Recorder | Zoom Meeting Scheduler and Recorder | v0.3Alpha Walk-through | Python"
      height="250">](https://www.youtube.com/watch?v=Tu31bdrZyW0)
-
+     
+### Alternatives
+- Warning - User discretion required! I don't any responsibility for any issues faced while using these alternatives.
+  They are just for inormative purpose only. I personally haven't tested either of these except [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
+- It is worth mentioning that some of these alternative work without using any 3rd party recording software, which is a really great feature to look on!
+- Well Documented
+     - [OZ-Automatic-Recorder](https://github.com/tsamouridis/OZ-Automatic-Recorder)
+     - [zoom-cli](https://github.com/tmonfre/zoom-cli)
+     - [AutoZoomRecorder](https://github.com/Edward11235/AutoZoomRecorder)
+     - [classRecorder](https://github.com/empobla/classRecorder)
+     - [AutoRecorder](https://github.com/SMazeikis/AutoRecorder)
+     - [zoom_recorder](https://github.com/nys99/zoom_recorder)
+- Other
+     - [automaticZoomRecorder](https://github.com/NKPmedia/automaticZoomRecorder)
+     - [zoom-recorder](https://github.com/rabimba/zoom-recorder)
+     - [zoom-recorder](https://github.com/aykborstelmann/zoom-recorder)
+     - [zoom-recorder](https://github.com/v1nc/zoom-recorder)
+     - [ZoomRecorder](https://github.com/pantherman594/ZoomRecorder)
+     - [zoom-meeting-recorder](https://github.com/cty012/zoom-meeting-recorder)
+     - [automaticZoomRecorder](https://github.com/royjan/automaticZoomRecorder)
+     - [Zoom-Meeting-Recorder](https://github.com/MJovanovic40/Zoom-Meeting-Recorder)
 ### Thanks!
