@@ -114,8 +114,8 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
      height="250">](https://www.youtube.com/watch?v=Tu31bdrZyW0)
      
 ### Alternatives
-- Warning - User discretion required! I don't any responsibility for any issues faced while using these alternatives.
-  They are just for inormative purpose only. I personally haven't tested either of these except [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
+- Warning - User discretion required! I don't take any responsibility for any issues faced while using these alternatives.
+  They are just for informative purpose only. I personally haven't tested either of these except [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
 - It is worth mentioning that some of these alternative work without using any 3rd party recording software, which is a really great feature to look on!
 - Well Documented Repos
      - [OZ-Automatic-Recorder](https://github.com/tsamouridis/OZ-Automatic-Recorder)
