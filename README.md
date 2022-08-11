@@ -13,15 +13,11 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
      - In case of doubt you can watch the [walkthrough video](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#video). 
 6. It is always recommended to test against a [Test Meeting](https://zoom.us/test) before joining a real meeting.
 7. Make sure that step 1,2,5 of [requirements](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements) are fulfilled.
-8. In App GUI click on Load Service. It will show all the logs of service created in past.
+8. In App GUI, Click on Load Service. It will show all the logs of service created in past.
 9. Click Autoload Suitable Service.
-10. Click Start Service and BOOM! You are ready to use this software like a champ!
+10. Click Start Service
 
-
-### Preview
-![HomePage](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/1.png)
-![Service View Page](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/2.png)
-![Meeting Loading Page](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/3.png)
+BOOM! You are ready to use this software like a champ!
 
 ### Download
 [<img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"
@@ -32,7 +28,7 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 ### Requirements
 1. [OBS Studio](https://obsproject.com/) installed at default install location.
 
-2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is only required only for initial run not regularly. Just User don't have to interfere in "Zoom Meet" Profile afterwards
+2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is only required only for initial run not regularly. User just don't have to interfere in "Zoom Meet" Profile afterwards
      - You can do a simple Google Search to know how to create a Scene in OBS Studio.
    
 3. [Python v3](https://www.python.org/)
@@ -42,7 +38,7 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
    (All libraries except PIL,ttkthemes are installed by default in Python)
   
    PIL can be installed by using given commands in Terminal/CMD.
-        ```markdown
+     ```markdown
         pip install pillow
         OR
         pip3 install pillow
@@ -54,7 +50,7 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
         pip3 install ttkthemes
         ```
   
-5. [Zoom Meeting](https://zoom.us/) App Installed with disabled setting for camera on at autojoin and enabled for computer audio on autojoin.
+5. [Zoom Meeting](https://zoom.us/) App Installed with disabled setting for camera on at autojoin and enabled setting for autojoin computer audio on joining meeting.
 
 ### Notes
 - Recording is supported right now only in Linux and Windows
@@ -63,12 +59,12 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 - Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it user may follow steps given in comments of main.py file.
 
 ### Build an executable
-- You can build your own executable by using pyinstaller, nuitka or any other [compiler](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_comparisons.html) that you like.
-- First install all required python libraries as per fourth point given in the [instructions](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements).
+- You can build your own executable by using pyinstaller, Nuitka or any other [compiler](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_comparisons.html) that you like.
+- First install all required python libraries as per 4th point given in the [instructions](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements).
 - Then install your favourite compiler using their documentation.
      - For pyinstaller use ```pip3 install pyinstaller``` or ```pip install pyinstaller```
-     - For nuitka use ```pip3 install nuitka``` or ```pip install nuitka``` and then you need a [C compiler](https://nuitka.net/doc/user-manual.html#requirements) which is automatically downloaded on first run if absent.
-- Open the Code directory in the File Explorer and open window powershell or terminal and run the given commands.
+     - For Nuitka use ```pip3 install nuitka``` or ```pip install nuitka``` and then you need a [C compiler](https://nuitka.net/doc/user-manual.html#requirements) which will be automatically downloaded on first run, if absent.
+- Open the Code directory in the File Explorer and open window powershell or terminal at that location and run the given commands.
      - UNIX based Systems(Linux,MacOS etc)
           ```markdown
           pyinstaller --noconsole --windowed --add-data "data:data" -i"data/icon.ico" --collect-submodules PIL main.py
@@ -108,6 +104,11 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
 2. Debug the app
 3. Make app feel more responsive
 
+### Preview
+![HomePage](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/1.png)
+![Service View Page](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/2.png)
+![Meeting Loading Page](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/3.png)     
+     
 ### Video
 [<img src="https://i.ytimg.com/vi/Tu31bdrZyW0/hqdefault.jpg"
      alt="Zoom Recorder | Zoom Meeting Scheduler and Recorder | v0.3Alpha Walk-through | Python"
