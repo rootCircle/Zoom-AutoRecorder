@@ -9,13 +9,13 @@ It is complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRe
 2. Run the executable or the main.py file as per the case may be.
 3. Install required libraries if you are using source code.
 4. [Optional] Then you may make an excutable from the step given [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#build-an-executable).Then revert back to step 2.
-5. Create a service by entering the details in app GUI.
+5. Create a service by entering the details in app GUI homepage.
      - In case of doubt you can watch the [walkthrough video](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#video). 
 6. It is always recommended to test against a [Test Meeting](https://zoom.us/test) before joining a real meeting.
 7. Make sure that step 1,2,5 of [requirements](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements) are fulfilled.
-8. In App GUI, Click on Load Service. It will show all the logs of service created in past.
-9. Click Autoload Suitable Service.
-10. Click Start Service
+8. In App GUI, Click on 'Load Pre-created Service'. It will show all the logs of service created in past.
+9. Then, Click 'Autoload Suitable Service'.
+10. Finally, Click 'Start Service'.
 
 BOOM! You are ready to use this software like a champ!
 
@@ -28,7 +28,7 @@ BOOM! You are ready to use this software like a champ!
 ### Requirements
 1. [OBS Studio](https://obsproject.com/) installed at default install location.
 
-2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is only required only for initial run not regularly. User just don't have to interfere in "Zoom Meet" Profile afterwards
+2. A scene in OBS Studio named "Zoom Meet" with recording set to Zoom Meeting screen with audio source and mic(If required). It is only required only for initial run not regularly. User just don't have to interfere in "Zoom Meet" Profile afterwards.
      - You can do a simple Google Search to know how to create a Scene in OBS Studio.
    
 3. [Python v3](https://www.python.org/)
@@ -42,18 +42,18 @@ BOOM! You are ready to use this software like a champ!
         pip install pillow
         OR
         pip3 install pillow
-
-        AND
-
+     ```
+     and
+     ```markdown
         pip install ttkthemes
         OR
         pip3 install ttkthemes
-        ```
+     ```
   
 5. [Zoom Meeting](https://zoom.us/) App Installed with disabled setting for camera on at autojoin and enabled setting for autojoin computer audio on joining meeting.
 
 ### Notes
-- Recording is supported right now only in Linux and Windows
+- Recording is supported right now only in Linux and Windows.
 - App hasn't been run on windows PC. So possible error may exists.
 - It might be possible that bashCommand in LoadService.launchRecordingbyOBS may give error in terminal. User may need to manually modify it.
 - Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it user may follow steps given in comments of main.py file.
@@ -62,8 +62,8 @@ BOOM! You are ready to use this software like a champ!
 - You can build your own executable by using pyinstaller, Nuitka or any other [compiler](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_comparisons.html) that you like.
 - First install all required python libraries as per 4th point given in the [instructions](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements).
 - Then install your favourite compiler using their documentation.
-     - For pyinstaller use ```pip3 install pyinstaller``` or ```pip install pyinstaller```
-     - For Nuitka use ```pip3 install nuitka``` or ```pip install nuitka``` and then you need a [C compiler](https://nuitka.net/doc/user-manual.html#requirements) which will be automatically downloaded on first run, if absent.
+     - For pyinstaller run ```pip3 install pyinstaller``` or ```pip install pyinstaller```
+     - For Nuitka run ```pip3 install nuitka``` or ```pip install nuitka``` and then you need a [C compiler](https://nuitka.net/doc/user-manual.html#requirements) which will be automatically downloaded on first run, if absent.
 - Open the Code directory in the File Explorer and open window powershell or terminal at that location and run the given commands.
      - UNIX based Systems(Linux,MacOS etc)
           ```markdown
@@ -100,9 +100,9 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
 - I admit that UI for loading Service screen is a bit unresponsive on starting service which may be resolved in later updates.
 
 ### Roadmap
-1. Check if rejoin feature works
-2. Debug the app
-3. Make app feel more responsive
+1. Check if rejoin feature works.
+2. Debug the app.
+3. Make app feel more responsive.
 
 ### Preview
 ![HomePage](https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/1.png)
@@ -134,4 +134,5 @@ After building the binary, copy 'ttkthemes' folder from site-packages folder(in 
      - [zoom-meeting-recorder](https://github.com/cty012/zoom-meeting-recorder)
      - [automaticZoomRecorder](https://github.com/royjan/automaticZoomRecorder)
      - [Zoom-Meeting-Recorder](https://github.com/MJovanovic40/Zoom-Meeting-Recorder)
+     
 ### Thanks!
