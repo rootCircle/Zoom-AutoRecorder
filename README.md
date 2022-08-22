@@ -8,7 +8,7 @@ It is a complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/Auto
 1. Download the binary/code from [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/releases).
 2. Run the executable or the main.py file as per the case may be.
      - [Optional] You can make an executable from the step given [here](#build-an-executable) if you are not using binary builds. Then revert to step 2.
-     - You can even run from script main.py provided that the requirements in [this section](#build-an-executable) are fulfilled.[Only library and python]
+     - You can even run from script main.py, provided that the requirements in [this section](#build-an-executable) are fulfilled.[Only library and python]
 3. Create a service by entering the details in the app's Create Service Page.
      - In case of doubt, you can watch the [walkthrough video](#video).
 4. Make sure that all the [requirements](#requirements) are fulfilled.
@@ -28,28 +28,27 @@ BOOM! You are ready to use this software like a champ!
 
 ### Requirements
 1. [OBS Studio](https://obsproject.com/) is installed at the default installation location.
-     - A scene in OBS Studio named "Zoom Meet" must be created with a recording set to Zoom Meeting screen with audio source and mic(If required). It is required only for the initial run, not regularly. Users just don't have to interfere in the "Zoom Meet" Profile afterwards.
+     - A scene in OBS Studio named "Zoom Meet" must be created with a recording set to Zoom Meeting screen with audio source and mic (If required). It is required only for the initial run, not regularly. Users just don't have to interfere in the "Zoom Meet" Profile afterwards.
           - You can do a simple Google Search to find out how to create a scene in OBS Studio.
    
 2. [Zoom Meeting](https://zoom.us/) App Installed 
-     - Login, if your meeting host requires it before joining the meeting.
-     - Ensure that 'join call with audio automatically' is set to enabled.
-     - Also ensure that join meeting in full screen is set automatically enabled for better recording.
+     - Log in, if your meeting host requires it, before joining the meeting.
+     - Ensure that 'join call with audio automatically' is set to be enabled.
+     - Also, ensure that join meeting in full screen is set automatically enabled for better recording.
      - Make sure that on joining the meeting, your microphone and webcam are disabled/turned off.
 
 ### Notes
-- Recording is supported right now only in Linux and Windows.
+- The recording is supported right now only in Linux and Windows.
 - The app hasn't been tested on Windows OS. So possible errors may exist.
 - It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 - Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it, the user may follow the steps given in the [comments](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L4) of the main.py file [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 
 ### Build an executable
 - Make sure you have fulfilled the following requirements:
-     i. [Python v3](https://www.python.org/) installed.
+     1. [Python v3](https://www.python.org/) installed.
 
-     ii. Python libraries: datetime, os, errno, sys, tkinter, PIL, time, sqlite3, subprocess, math, platform, webbrowser
+     2. Python libraries: datetime, os, errno, sys, tkinter, PIL, time, sqlite3, subprocess, math, platform, webbrowser
           - (All libraries except PIL and ttkthemes are installed by default in Python)
-
           - PIL can be installed by using given commands in Terminal/CMD.
                ```markdown
                pip install pillow ttkthemes
@@ -78,7 +77,7 @@ BOOM! You are ready to use this software like a champ!
 - Run
      - Nuitka on Windows or pyinstaller: Run main.exe or main
      - Nuitka on Linux-based OS creates a shared-library file named 'main' which can be run by opening the terminal in main.dist and typing ```./main```
-- Also see [Workaround for Nuitka Build](#workaround-for-nuitka-build).
+- Also, see [Workaround for Nuitka Build](#workaround-for-nuitka-build).
 
 ### Workaround for Nuitka Build
 After building the binary, copy the 'ttkthemes' folder from the site-packages folder (in the lib directory) from your standard python installation location, to remove importing issues.
