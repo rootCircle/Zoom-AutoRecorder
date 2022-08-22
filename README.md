@@ -79,7 +79,7 @@ BOOM! You are ready to use this software like a champ!
 - Also, see [Workaround for Nuitka Build](#workaround-for-nuitka-build).
 
 ### Workaround for Nuitka Build
-After building the binary, copy the 'ttkthemes' folder from the site-packages folder (in the lib directory) to your standard Python installation location to remove import issues.
+After building the binary, copy the 'ttkthemes' folder from the site-packages folder (in the lib directory) in your standard Python installation location to main.dist directory, to remove import errors.
 - To run the binary, open a terminal in the <Project-location>/app_build/main.dist directory, then type and run main.exe or ./main, depending on your OS.
 
 - Running may cause an error after the app window is closed. (Any suggestions/workarounds for this are welcome.)
