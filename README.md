@@ -134,6 +134,7 @@ height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs
      - [zoom-meeting-recorder](https://github.com/cty012/zoom-meeting-recorder)
      - [automaticZoomRecorder](https://github.com/royjan/automaticZoomRecorder)
      - [Zoom-Meeting-Recorder](https://github.com/MJovanovic40/Zoom-Meeting-Recorder)
-     
+- Closed sourced and Non Free Software (Not Recommended)
+     - [RecMaster](https://www.recmaster.net/)
 
 ### Thanks!
