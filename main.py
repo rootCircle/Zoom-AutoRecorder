@@ -68,6 +68,14 @@ Image Files Directories
 LOGOImgDir = os.path.join(os.path.dirname(__file__),"data", "logonew.png")
 DEFAULTIMAGEDir = os.path.join(os.path.dirname(__file__),"data", "Additem.png")
 HOMEPAGEImgDir = os.path.join(os.path.dirname(__file__),"data", "logo.png")
+BANNERImgDir = os.path.join(os.path.dirname(__file__),"data", "banner.png")
+
+HOMEIconDir = [os.path.join(os.path.dirname(__file__),"data", "createService.png"),
+               os.path.join(os.path.dirname(__file__), "data", "viewService.png"),
+               os.path.join(os.path.dirname(__file__),"data", "autoloadService.png"),
+               os.path.join(os.path.dirname(__file__),"data", "setting.png")]
+
+
 
 CHOOSENMEETDATA = {}
 
@@ -288,7 +296,7 @@ class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self._frame = None
-        self.switch_frame(CreateService)
+        self.switch_frame(HomePage)
 
     def switch_frame(self, frame_class):
         new_frame = frame_class(self)
@@ -354,6 +362,50 @@ class ScrollableFrame(ttk.Frame):
             return
         self.canvas.yview_scroll(-1, "units")
 
+class HomePage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master, bg="#333333")
+        style = ThemedStyle(self)
+        style.set_theme("default")
+        self.makeWidgets(master)
+
+    def makeWidgets(self, master):
+        lbl = tk.Label(self, text="Zoom Auto Recorder")
+        lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
+        lbl.grid(row=0, column=0, columnspan=5, sticky='ew')
+
+        Apptools.image_Show(self, BANNERImgDir, 1, 0, 650, 150, cspan=2,py=10)
+
+        row, col = 2, 0
+        for i in range(len(HOMEIconDir)):
+            try:
+                Photo = Image.open(HOMEIconDir[i])
+                Photo = Photo.resize((200, 100))
+                render = ImageTk.PhotoImage(Photo)
+            except Exception as e:
+                Photo = Image.open(DEFAULTIMAGEDir)
+                Photo = Photo.resize((200, 200))
+                render = ImageTk.PhotoImage(Photo)
+                Apptools.writeLog(e)
+
+            imgbtnfs = tk.Button(self, image=render)
+            imgbtnfs.image = render
+            imgbtnfs.config(bg="white")
+            imgbtnfs.grid(row=row, column=col, padx=10, pady=10)
+            imgbtnfs.config(command=lambda x=i: self.framechange(master, x))
+
+            if col == 1:
+                row += 1
+                col = 0
+            else:
+                col += 1
+
+    def framechange(self, master, x):
+        if x < len(HOMEIconDir):
+            master.switch_frame([CreateService, ViewService, LoadService, AppSettings][x])
+        else:
+            messagebox.showwarning("Warning", "Some Error have occurred!\nContact devs with logs!")
+
 
 class CreateService(tk.Frame):
     def __init__(self, master):
@@ -363,7 +415,7 @@ class CreateService(tk.Frame):
         self.makeWidgets(master)
 
     def makeWidgets(self, master):
-        Apptools.image_Show(self, HOMEPAGEImgDir, 0, 0, 300, 450, rspan=16)
+        Apptools.image_Show(self, HOMEPAGEImgDir, 0, 0, 300, 450, rspan=17)
 
         lbl = tk.Label(self, text="Zoom Auto Recorder")
         lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
@@ -452,25 +504,10 @@ class CreateService(tk.Frame):
         btn.config(bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=13, column=5, padx=15, pady=15, sticky='nw')
 
-        btn = tk.Button(self, text="Create Service & Load",
-                        command=lambda: self.createAndLoadService(master, data={'nickname': nickname.get(),
-                                                                                'meetID': meetID.get(),
-                                                                                'meetPassword': meetPassword.get(),
-                                                                                'startTimeHour': startTimeHour.get(),
-                                                                                'startTimeMinute': startTimeMinute.get(),
-                                                                                'startTime_am_pm': startTime_am_pm.get(),
-                                                                                'rejoinInterval': self.rejoinInterval.get() if self.isFreeMeet.get() == 'True' else '0',
-                                                                                'updateFrequency': self.updateFrequency.get() if self.useCustomEngine.get() == 'True' else '1',
-                                                                                'warmUpDuration': self.warmUpDuration.get() if self.useCustomEngine.get() == 'True' else '5',
-                                                                                'meetLength': meetLength.get(),
-                                                                                'recordMeet': recordMeet.get()}))
+        btn = tk.Button(self, text="Go to Homepage",
+                        command=lambda: master.switch_frame(HomePage))
         btn.config(bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9")
-        btn.grid(row=14, column=1, columnspan=5, padx=15, pady=5, sticky='nsew')
-
-        btn = tk.Button(self, text="Load Pre-created Services",
-                        command=lambda: master.switch_frame(ViewService))
-        btn.config(bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9")
-        btn.grid(row=15, column=1, columnspan=5, padx=15, pady=15, sticky='nsew')
+        btn.grid(row=14, column=1, columnspan=5, padx=15, pady=15, sticky='nsew')
 
     def showCustomEngine(self):
         if self.useCustomEngine.get() == 'True':
@@ -657,14 +694,18 @@ class ViewService(tk.Frame):
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=3, column=1, padx=5, pady=10)
 
+        btn = tk.Button(self, text="Go to Homepage",
+                        command=lambda: master.switch_frame(HomePage))
+        btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
+        btn.grid(row=4, column=1, padx=5, pady=10)
+
         lbl = tk.Label(self, text="Create Service")
         lbl.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
         lbl.config(cursor="hand2")
         lbl.bind("<Button-1>", lambda e: master.switch_frame(CreateService))
-        lbl.grid(row=4, column=1, sticky="ew", pady=10)
+        lbl.grid(row=5, column=1, sticky="ew", pady=10)
 
-    @staticmethod
-    def autoload(master, out):
+    def autoload(self, master, out, externalCall=False):
         if out:
             earliestCall = out[0]
             currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
@@ -692,10 +733,11 @@ class ViewService(tk.Frame):
                               'meetLength': earliestCall[8],
                               'recordMeet': earliestCall[9]}
                 globals()['CHOOSENMEETDATA'] = mappedData
-                master.switch_frame(LoadService)
-            else:
+                if not externalCall:
+                    master.switch_frame(LoadService)
+            elif not externalCall:
                 messagebox.showinfo("Warning", "Services Expired\nCome tomorrow or create one!")
-        else:
+        elif not externalCall:
             messagebox.showwarning("Warning", "No Service Exists\nCreate One!")
 
     def getDataFromStorage(self):
@@ -737,73 +779,84 @@ class LoadService(tk.Frame):
         sep = ttk.Separator(self, orient='horizontal')
         sep.grid(row=1, column=1, sticky="ew")
 
-        consoleText = "Initialising..."
+        if not CHOOSENMEETDATA:
+            out = ViewService.getDataFromStorage(self)
+            ViewService.autoload(self, master, out, externalCall=True)
 
-        console = tk.Label(self, text=consoleText)
-        console.config(font=("Segoe UI", 6), fg="#E8E8E8", bg="#333333")
-        console.grid(row=2, column=0, sticky='nsew')
 
-        am_pm = "AM" if CHOOSENMEETDATA['startTimeHour'] < 12 else "PM"
-        startshowhour = CHOOSENMEETDATA['startTimeHour'] if am_pm == "AM" or CHOOSENMEETDATA['startTimeHour'] == 12 \
-            else CHOOSENMEETDATA['startTimeHour'] - 12
-        startshowmin = CHOOSENMEETDATA['startTimeMinute'] if CHOOSENMEETDATA['startTimeMinute'] != 0 else "00"
+        if CHOOSENMEETDATA:
 
-        lbl = tk.Label(self, text="Waiting for the meeting to start at time {0}:{1} {2}"
-                       .format(startshowhour, startshowmin, am_pm))
-        lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=3, column=0, sticky='ew')
+            consoleText = "Initialising..."
 
-        txt = "Nickname : " + CHOOSENMEETDATA['nickname'].title().strip()
-        txt += "\nMeeting ID : " + CHOOSENMEETDATA['meetID']
-        txt += "\nStarting Time : {0}:{1} {2}".format(startshowhour, startshowmin, am_pm)
-        txt += "\nMeeting Length : {0} min".format(CHOOSENMEETDATA['meetLength'])
+            console = tk.Label(self, text=consoleText)
+            console.config(font=("Segoe UI", 6), fg="#E8E8E8", bg="#333333")
+            console.grid(row=2, column=0, sticky='nsew')
 
-        btn = tk.Button(self, text="Meeting Details:\n" + txt)
-        btn.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
-        btn.grid(row=5, column=0, sticky='ew')
+            am_pm = "AM" if CHOOSENMEETDATA['startTimeHour'] < 12 else "PM"
+            startshowhour = CHOOSENMEETDATA['startTimeHour'] if am_pm == "AM" or CHOOSENMEETDATA['startTimeHour'] == 12 \
+                else CHOOSENMEETDATA['startTimeHour'] - 12
+            startshowmin = CHOOSENMEETDATA['startTimeMinute'] if CHOOSENMEETDATA['startTimeMinute'] != 0 else "00"
 
-        consoleText += "\n[Loading 10%] Create Zoom Link"
-        console.config(text=consoleText)
+            lbl = tk.Label(self, text="Waiting for the meeting to start at time {0}:{1} {2}"
+                           .format(startshowhour, startshowmin, am_pm))
+            lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
+            lbl.grid(row=3, column=0, sticky='ew')
 
-        MeetLink = self.createMeetLink(CHOOSENMEETDATA['meetID'], CHOOSENMEETDATA['meetPassword'])
-        if MeetLink:
-            consoleText += "\n[Loading 20%] Zoom Link Created\n" + MeetLink
+            txt = "Nickname : " + CHOOSENMEETDATA['nickname'].title().strip()
+            txt += "\nMeeting ID : " + CHOOSENMEETDATA['meetID']
+            txt += "\nStarting Time : {0}:{1} {2}".format(startshowhour, startshowmin, am_pm)
+            txt += "\nMeeting Length : {0} min".format(CHOOSENMEETDATA['meetLength'])
+
+            btn = tk.Button(self, text="Meeting Details:\n" + txt)
+            btn.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
+            btn.grid(row=5, column=0, sticky='ew')
+
+            consoleText += "\n[Loading 10%] Create Zoom Link"
             console.config(text=consoleText)
 
-            consoleText += "\n[Loading 30%] Computing Time Ranges for triggering Response"
-            console.config(text=consoleText)
-
-            timeRange = self.checkTimeRange(CHOOSENMEETDATA)
-
-            if timeRange:
-                consoleText += "\n[Loading 40%] Time Range Generated"
+            MeetLink = self.createMeetLink(CHOOSENMEETDATA['meetID'], CHOOSENMEETDATA['meetPassword'])
+            if MeetLink:
+                consoleText += "\n[Loading 20%] Zoom Link Created\n" + MeetLink
                 console.config(text=consoleText)
 
-                consoleText += "\n[Loading 50%] Validating Inputted Data"
+                consoleText += "\n[Loading 30%] Computing Time Ranges for triggering Response"
                 console.config(text=consoleText)
 
-                consoleText += "\n[Loading 100%] Initialised Successfully\nClick Start Service!"
-                console.config(text=consoleText)
+                timeRange = self.checkTimeRange(CHOOSENMEETDATA)
 
+                if timeRange:
+                    consoleText += "\n[Loading 40%] Time Range Generated"
+                    console.config(text=consoleText)
+
+                    consoleText += "\n[Loading 50%] Validating Inputted Data"
+                    console.config(text=consoleText)
+
+                    consoleText += "\n[Loading 100%] Initialised Successfully\nClick Start Service!"
+                    console.config(text=consoleText)
+
+                else:
+                    consoleText += "\n[Loading 30%] Oops Error Occurred while creating time range\nRetry Later"
+                    console.config(text=consoleText)
             else:
-                consoleText += "\n[Loading 30%] Oops Error Occurred while creating time range\nRetry Later"
+                consoleText += "\n[Loading 10%] Oops Error Occurred while creating Meet link\nRetry Later"
                 console.config(text=consoleText)
+
+            btn = tk.Button(self, text="Start Service",
+                            command=lambda: self.processing(MeetLink, timeRange, console, consoleText))
+            btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
+            btn.grid(row=6, column=0, padx=5, pady=10)
+
+            btn = tk.Button(self, text="Reload Page",
+                            command=lambda: master.switch_frame(LoadService))
+            btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
+            btn.grid(row=7, column=0, padx=5, pady=10)
         else:
-            consoleText += "\n[Loading 10%] Oops Error Occurred while creating Meet link\nRetry Later"
-            console.config(text=consoleText)
-
-        btn = tk.Button(self, text="Start Service",
-                        command=lambda: self.processing(MeetLink, timeRange, console, consoleText))
-        btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
-        btn.grid(row=6, column=0, padx=5, pady=10)
-
-        btn = tk.Button(self, text="Reload Page",
-                        command=lambda: master.switch_frame(LoadService))
-        btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
-        btn.grid(row=7, column=0, padx=5, pady=10)
+            lbl = tk.Label(self, text="No meeting selected!\nChoose one")
+            lbl.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
+            lbl.grid(row=2, column=0, sticky='ew')
 
         btn = tk.Button(self, text="Go to Home",
-                        command=lambda: master.switch_frame(CreateService))
+                        command=lambda: master.switch_frame(HomePage))
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=8, column=0, padx=5, pady=10)
 
@@ -978,6 +1031,26 @@ class LoadService(tk.Frame):
                 os.system(bashCommand)
             except Exception as e:
                 messagebox.showerror("Error", e)
+
+
+class AppSettings(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master, bg="#333333")
+        style = ThemedStyle(self)
+        style.set_theme("default")
+        self.makeWidgets(master)
+
+    def makeWidgets(self, master):
+        lbl = tk.Label(self, text="Settings")
+        lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
+        lbl.grid(row=0, column=0, sticky='ew')
+
+        # Default Recorder + OBS Location + fps + resolution + save dir if manual + mannual third party bash command with reset
+        # Display bash cmmand
+        btn = tk.Button(self, text="Go to Home",
+                        command=lambda: master.switch_frame(HomePage))
+        btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
+        btn.grid(row=8, column=0, padx=5, pady=10)
 
 
 # Main Program
