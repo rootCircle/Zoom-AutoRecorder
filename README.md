@@ -102,6 +102,7 @@ After building the binary, copy the 'ttkthemes' folder from the site-packages fo
 5. Support for the integrated screencast, as well as third-party recorders such as OBS and VLC (assistance needed!).
 6. Improved usability.
 7. Removal of the persistent loading screen bug.
+8. Add support for modification and deletion of meeting services with repeatation flexibility in meetings.
 
 ### Preview
 [<img src="https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
