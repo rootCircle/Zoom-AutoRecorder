@@ -2,18 +2,18 @@
 
 ### Introduction
 Zoom Recorder is a free and open-source Python-based GUI-operated screen recorder and scheduler for Zoom meetings.
-It is a complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with added GUI and reduced bugs, aimed at simplicity and ease of use while requiring minimal user-details and program configuration across all platforms.
+It is a complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with added GUI and reduced bugs, aimed at simplicity and ease of use while requiring minimal user details and program configuration across all platforms.
 
 ### How to Use
 1. Download the binary/code from [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/releases).
 2. Run the executable or the main.py file as per the case may be.
-     - [Optional] Install the required libraries if you are using source code.
-          - Then you can make an executable from the step given [here](#build-an-executable). Then revert to step 2.
+     - [Optional] You can make an executable from the step given [here](#build-an-executable) if you are not using binary builds. Then revert to step 2.
+     - You can even run from script main.py provided that the requirements in [this section](#build-an-executable) are fulfilled.[Only library and python]
 3. Create a service by entering the details in the app's Create Service Page.
      - In case of doubt, you can watch the [walkthrough video](#video).
 4. Make sure that all the [requirements](#requirements) are fulfilled.
-5. In App GUI, click on 'Autoload Service' and then click 'Start Service'.
-     - Autoload Service automatically loads most suitable meeting for user to join.
+5. On App GUI's Homepage, click on 'Autoload Service' and then click 'Start Service'.
+     - Autoload Service automatically loads the most suitable meeting for the user to join.
      - Alternatively, you may use 'View Service' to open alternate meetings manually. 
 
 > It is always recommended to test against a [Test Meeting](https://zoom.us/test) before attending a real meeting.
@@ -28,21 +28,19 @@ BOOM! You are ready to use this software like a champ!
 
 ### Requirements
 1. [OBS Studio](https://obsproject.com/) is installed at the default installation location.
-
-2. A scene in OBS Studio named "Zoom Meet" with a recording set to Zoom Meeting screen with audio source and mic(If required). It is required only for the initial run, not regularly. Users just don't have to interfere in the "Zoom Meet" Profile afterward.
-     - You can do a simple Google Search to find out how to create a scene in OBS Studio.
+     - A scene in OBS Studio named "Zoom Meet" must be created with a recording set to Zoom Meeting screen with audio source and mic(If required). It is required only for the initial run, not regularly. Users just don't have to interfere in the "Zoom Meet" Profile afterwards.
+          - You can do a simple Google Search to find out how to create a scene in OBS Studio.
    
-3. [Zoom Meeting](https://zoom.us/) App Installed 
+2. [Zoom Meeting](https://zoom.us/) App Installed 
      - Login, if your meeting host requires it before joining the meeting.
-     - Enable with a disabled setting for the webcam at auto-join and enabled the setting for auto-join computer audio on joining the meeting.
-     - Ensure that join call with audio automatically is set to enabled.
+     - Ensure that 'join call with audio automatically' is set to enabled.
      - Also ensure that join meeting in full screen is set automatically enabled for better recording.
-     - Make sure that on joining the meeting, your microphone and webcam is disabled/turned off.
+     - Make sure that on joining the meeting, your microphone and webcam are disabled/turned off.
 
 ### Notes
 - Recording is supported right now only in Linux and Windows.
 - The app hasn't been tested on Windows OS. So possible errors may exist.
-- It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it.
+- It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 - Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it, the user may follow the steps given in the [comments](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L4) of the main.py file [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 
 ### Build an executable
@@ -59,7 +57,7 @@ BOOM! You are ready to use this software like a champ!
                pip3 install pillow ttkthemes
                ```
 - You can build your executable by using pyinstaller, Nuitka, or any other [compiler](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_comparisons.html) that you like.
-- Then install your favorite compiler using their documentation.
+- Then install your favourite compiler using their documentation.
      - For pyinstaller, run ```pip3 install pyinstaller``` or ```pip install pyinstaller```
      - For Nuitka, run ```pip3 install nuitka``` or ```pip install nuitka```, and then you need a [C compiler](https://nuitka.net/doc/user-manual.html#requirements) which will be automatically downloaded on the first run, if absent.
 - Open the Code directory in the File Explorer and open the Windows PowerShell or terminal at that location and run the given commands.
@@ -103,9 +101,9 @@ After building the binary, copy the 'ttkthemes' folder from the site-packages fo
 2. Debug the app.
 3. Make the app feel more responsive.
 4. Add a properties section to set up the recording service, key functions, etc.
-5. Support for integrated screencast, as well as third-party recorders such as OBS and VLC (assistance needed!).
+5. Support for the integrated screencast, as well as third-party recorders such as OBS and VLC (assistance needed!).
 6. Better ease of use.
-7. Removal of persistant loading screen Bug.
+7. Removal of persistent loading screen Bug.
 
 ### Preview
 [<img src="https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
@@ -120,7 +118,7 @@ height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs
 ### Alternatives
 - Warning - User discretion required! I don't take any responsibility for any issues faced while using these alternatives.
   They are just for informative purposes only. I have not tested either of these, except [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
-- I also need to inform user that a few of below mentioned scripts may require sensitive info, including but not limited to, your zoom passwords etc. So proceed at your own risk only!
+- I also need to inform users that a few of the below-mentioned scripts may require sensitive info, including but not limited to, your zoom passwords etc. So proceed at your own risk only!
 - It is worth mentioning that some of these alternatives work without using any 3rd party recording software, which is a great feature to look at!
 - Well Documented Repos
      - [OZ-Automatic-Recorder](https://github.com/tsamouridis/OZ-Automatic-Recorder)
