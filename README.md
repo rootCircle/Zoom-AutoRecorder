@@ -2,20 +2,20 @@
 
 ### Introduction
 Zoom Recorder is a free and open-source Python-based GUI-operated screen recorder and scheduler for Zoom meetings.
-It is a complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with added GUI and reduced bugs.
+It is a complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with added GUI and reduced bugs, aimed at simplicity and ease of use while requiring minimal user-details and program configuration across all platforms.
 
 ### How to Use
 1. Download the binary/code from [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/releases).
 2. Run the executable or the main.py file as per the case may be.
-3. Install the required libraries if you are using source code.
-4. [Optional] Then you can make an executable from the step given [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#build-an-executable). Then revert to step 2.
-5. Create a service by entering the details in the app's GUI homepage.
+3. [Optional] Install the required libraries if you are using source code.
+     - Then you can make an executable from the step given [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#build-an-executable). Then revert to step 2.
+4. Create a service by entering the details in the app's GUI homepage.
      - In case of doubt, you can watch the [walkthrough video](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#video).
-6. It is always recommended to test against a [Test Meeting](https://zoom.us/test) before attending a real meeting.
-7. Make sure that steps 1,2 & 5 of the [requirements](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements) are fulfilled.
-8. In App GUI, click on 'Load Pre-created Service'. It will show all the logs of services created in the past.
-9. Then, click 'Autoload Suitable Service'.
-10. Finally, click 'Start Service'.
+5. It is always recommended to test against a [Test Meeting](https://zoom.us/test) before attending a real meeting.
+6. Make sure that steps 1,2 & 5 of the [requirements](https://github.com/Microsoftlabs/Zoom-AutoRecorder/edit/main/README.md#requirements) are fulfilled.
+7. In App GUI, click on 'Load Pre-created Service'. It will show all the logs of services created in the past.
+8. Then, click 'Autoload Suitable Service'.
+9. Finally, click 'Start Service'.
 
 BOOM! You are ready to use this software like a champ!
 
@@ -39,17 +39,11 @@ BOOM! You are ready to use this software like a champ!
  
    PIL can be installed by using given commands in Terminal/CMD.
    ```markdown
-   pip install pillow
+   pip install pillow ttkthemes
    OR
-   pip3 install pillow
+   pip3 install pillow ttkthemes
    ```
-   And
-   ```markdown
-   pip install ttkthemes
-   OR
-   pip3 install ttkthemes
-   ```
- 
+   
 5. [Zoom Meeting](https://zoom.us/) App Installed with a disabled setting for the webcam at auto-join and enabled the setting for auto-join computer audio on joining the meeting.
 
 ### Notes
@@ -97,12 +91,16 @@ After building the binary, copy the 'ttkthemes' folder from the site-packages fo
 
 ### ⚠ Warning
 - Since the app is in the early development phase, it might be possible that it may not work at all. Feel free to report any bugs if they exist.
-- The UI for loading the Service screen is a bit unresponsive on starting the service, which may be resolved in later updates.
+- The UI for loading the Service screen is a bit messy on starting the service, which may be resolved in later updates.
 
 ### Roadmap
 1. Check if the rejoin feature works.
 2. Debug the app.
 3. Make the app feel more responsive.
+4. Add a properties section to set up the recording service, key functions, etc.
+5. Support for integrated screencast, as well as third-party recorders such as OBS and VLC (assistance needed!).
+6. Better ease of use.
+7. Removal of persistant loading screen Bug.
 
 ### Preview
 [<img src="https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
@@ -117,6 +115,7 @@ height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs
 ### Alternatives
 - Warning - User discretion required! I don't take any responsibility for any issues faced while using these alternatives.
   They are just for informative purposes only. I have not tested either of these, except [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
+- I also need to inform user that a few of below mentioned scripts may require sensitive info, including but not limited to, your zoom passwords etc. So proceed at your own risk only!
 - It is worth mentioning that some of these alternatives work without using any 3rd party recording software, which is a great feature to look at!
 - Well Documented Repos
      - [OZ-Automatic-Recorder](https://github.com/tsamouridis/OZ-Automatic-Recorder)
