@@ -40,7 +40,7 @@ BOOM! You are ready to use this software like a champ!
 ### Notes
 - The recording is supported right now only on Linux and Windows.
 - The app hasn't been tested on the Windows OS. Possible errors may exist.
-- It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
+- It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it from [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 - Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it, the user may follow the steps given in the [comments](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L4) of the main.py file [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 
 ### Build an executable
@@ -76,9 +76,9 @@ BOOM! You are ready to use this software like a champ!
 - Run
      - Nuitka on Windows or pyinstaller: Run main.exe or main
      - On Linux-based OS, Nuitka creates a shared-library file named 'main' which can be run by opening the terminal in main.dist and typing ```./main```
-- Also, see [Workaround for Nuitka Build](#workaround-for-nuitka-build).
+- Also, see [Workaround for Nuitka Build](#workaround-for-nuitka-builds) for fixing the errors in Nuitka builds.
 
-### Workaround for Nuitka Build
+### Workaround for Nuitka Builds
 After building the binary, copy the 'ttkthemes' folder from the site-packages folder (in the lib directory) in your standard Python installation location to main.dist directory, to remove import errors.
 - To run the binary, open a terminal in the <Project-location>/app_build/main.dist directory, then type and run main.exe or ./main, depending on your OS.
 
@@ -100,7 +100,7 @@ After building the binary, copy the 'ttkthemes' folder from the site-packages fo
 3. Make the app feel more responsive.
 4. Add a properties section to set up the recording service, key functions, etc.
 5. Support for the integrated screencast, as well as third-party recorders such as OBS and VLC (assistance needed!).
-6. Better ease of use.
+6. Improved usability.
 7. Removal of the persistent loading screen bug.
 
 ### Preview
@@ -116,7 +116,7 @@ height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs
 ### Alternatives
 - Warning: User discretion is required! I don't take any responsibility for any issues faced while using these alternatives.
   They are just for informational purposes only. I have not tested either of these, except for [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
-- I also need to inform users that a few of the below-mentioned scripts may require sensitive info, including but not limited to, your zoom passwords, etc. So proceed solely at your own risk only!
+- I also need to inform users that a few of the below-mentioned scripts may require sensitive info, including but not limited to, your zoom passwords, etc. So proceed solely at your own risk!
 - It is worth mentioning that some of these alternatives work without using any 3rd party recording software, which is a great feature to look at!
 - Well-documented Repos
      - [OZ-Automatic-Recorder](https://github.com/tsamouridis/OZ-Automatic-Recorder)
