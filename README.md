@@ -68,7 +68,7 @@ BOOM! You are ready to use this software like a champ!
           ```markdown
           pyinstaller --noconsole --windowed --add-data "data;data" -i"data/icon.ico" --collect-submodules PIL main.py
           ```
-     - [Not Recommended for Novice Users] Any operating system(s).Unstable; includes bugs
+     - [Not Recommended for Novice Users] Any operating system(s).Unstable; contains bugs
           ```markdown
           python3 -m nuitka --standalone --nofollow-imports --remove-output --no-pyi-file --include-package=PIL --include-module=ttkthemes --output-dir=app_build --enable-plugin=tk-inter --onefile --include-data-dir=data=data --windows-icon-from-ico=data/icon.ico main.py
           ```
@@ -80,19 +80,19 @@ BOOM! You are ready to use this software like a champ!
 
 ### Workaround for Nuitka Build
 After building the binary, copy the 'ttkthemes' folder from the site-packages folder (in the lib directory) to your standard Python installation location to remove import issues.
-- To run the binary, open a terminal in the /app_build/main.dist directory, then type and run main.exe or ./main, depending on your OS.
+- To run the binary, open a terminal in the <Project-location>/app_build/main.dist directory, then type and run main.exe or ./main, depending on your OS.
 
-- Running may cause an error after the app window is closed. (Any suggestions/workarounds on this are welcome.)
+- Running may cause an error after the app window is closed. (Any suggestions/workarounds for this are welcome.)
      ```
      ............/zoomRecorder/app_build/main.dist/tkinter/__init__.py", line 4025, in __del__
      TypeError: catching classes that do not inherit from BaseException is not allowed
      )
      ```
-- Novice users are warned against using the Nuitka build because of its comparatively more complex installation than pyinstaller and increased build size and present bugs in compiling the script on it. (Nuitka builds are faster performance-wise, btw)
+- Novice users are warned against using the Nuitka build because of its comparatively more complex installation than pyinstaller, increased build size, and present bugs in compiling the script on it. (Nuitka builds are faster performance-wise, btw.)
 
 ### ⚠ Warning
 - Since the app is in the early development phase, it might be possible that it may not work at all. Feel free to report any bugs if they exist.
-- The UI for loading the Service screen is a bit messy on starting the service, which may be resolved in later updates.
+- The UI for the loadService screen is a bit messy on starting the service, which may be resolved in later updates.
 
 ### Roadmap
 1. Check if the rejoin feature works.
@@ -101,7 +101,7 @@ After building the binary, copy the 'ttkthemes' folder from the site-packages fo
 4. Add a properties section to set up the recording service, key functions, etc.
 5. Support for the integrated screencast, as well as third-party recorders such as OBS and VLC (assistance needed!).
 6. Better ease of use.
-7. Removal of persistent loading screen Bug.
+7. Removal of the persistent loading screen bug.
 
 ### Preview
 [<img src="https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
@@ -114,11 +114,11 @@ height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs
      height="250">](https://www.youtube.com/watch?v=Tu31bdrZyW0)
      
 ### Alternatives
-- Warning - User discretion required! I don't take any responsibility for any issues faced while using these alternatives.
-  They are just for informative purposes only. I have not tested either of these, except [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
-- I also need to inform users that a few of the below-mentioned scripts may require sensitive info, including but not limited to, your zoom passwords etc. So proceed at your own risk only!
+- Warning: User discretion is required! I don't take any responsibility for any issues faced while using these alternatives.
+  They are just for informational purposes only. I have not tested either of these, except for [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
+- I also need to inform users that a few of the below-mentioned scripts may require sensitive info, including but not limited to, your zoom passwords, etc. So proceed solely at your own risk only!
 - It is worth mentioning that some of these alternatives work without using any 3rd party recording software, which is a great feature to look at!
-- Well Documented Repos
+- Well-documented Repos
      - [OZ-Automatic-Recorder](https://github.com/tsamouridis/OZ-Automatic-Recorder)
      - [zoom-cli](https://github.com/tmonfre/zoom-cli)
      - [AutoZoomRecorder](https://github.com/Edward11235/AutoZoomRecorder)
