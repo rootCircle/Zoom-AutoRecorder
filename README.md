@@ -126,6 +126,11 @@ height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs
      - [classRecorder](https://github.com/empobla/classRecorder)
      - [AutoRecorder](https://github.com/SMazeikis/AutoRecorder)
      - [zoom_recorder](https://github.com/nys99/zoom_recorder)
+     - [Zoom-Meeting-and-Recording](https://github.com/cowsaysfoo/Zoom-Meeting-and-Recording)
+     - [autozoom](https://github.com/rebekahchin/autozoom)
+     - [zoom-OBS-Automation](https://github.com/mehedihasan1165/zoom-OBS-Automation)
+     - [zoomrec](https://github.com/kastldratza/zoomrec)
+     - [autozoom](https://github.com/Owl-dy/autozoom)
 - Other Repos
      - [automaticZoomRecorder](https://github.com/NKPmedia/automaticZoomRecorder)
      - [zoom-recorder](https://github.com/rabimba/zoom-recorder)
