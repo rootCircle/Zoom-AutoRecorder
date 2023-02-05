@@ -1,11 +1,11 @@
-## [Zoom AutoRecorder](https://microsoftlabs.github.io/Zoom-AutoRecorder/)
+## [Zoom AutoRecorder](https://rootCircle.github.io/Zoom-AutoRecorder/)
 
 ### Introduction
 Zoom Recorder is a free and open-source Python-based GUI-operated screen recorder and scheduler for Zoom meetings.
-It is a complete rewrite of [AutoRecorder](https://github.com/Microsoftlabs/AutoRecorder) with an added GUI and fewer bugs, aimed at simplicity and ease of use while requiring minimal user details and program configuration across all platforms.
+It is a complete rewrite of [AutoRecorder](https://github.com/rootCircle/AutoRecorder) with an added GUI and fewer bugs, aimed at simplicity and ease of use while requiring minimal user details and program configuration across all platforms.
 
 ### How to Use
-1. Download the binary/code from [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/releases).
+1. Download the binary/code from [here](https://github.com/rootCircle/Zoom-AutoRecorder/releases).
 2. Run the executable or the main.py file, as the case may be.
      - [Optional] You can make an executable from the steps given [here](#build-an-executable) if you are not using binary builds. Then revert to step 2.
      - You can even run it from the script main.py, provided that the requirements in [this section](#build-an-executable) are fulfilled. [Only Python and the libraries]
@@ -23,7 +23,7 @@ BOOM! You are ready to use this software like a champ!
 ### Download
 [<img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white"
      alt="Download from GitHub"
-     height="60">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/releases)
+     height="60">](https://github.com/rootCircle/Zoom-AutoRecorder/releases)
 
 
 ### Requirements
@@ -40,8 +40,8 @@ BOOM! You are ready to use this software like a champ!
 ### Notes
 - The recording is supported right now only on Linux and Windows.
 - The app hasn't been tested on the Windows OS. Possible errors may exist.
-- It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it from [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
-- Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it, the user may follow the steps given in the [comments](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L4) of the main.py file [here](https://github.com/Microsoftlabs/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
+- It might be possible that bashCommand in LoadService.launchRecordingbyOBS may cause an error in the terminal. Users may need to manually modify it from [here](https://github.com/rootCircle/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
+- Since recording through Linux is through Software Encoding, users may notice high CPU usage of OBS Studio. To fix it, the user may follow the steps given in the [comments](https://github.com/rootCircle/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L4) of the main.py file [here](https://github.com/rootCircle/Zoom-AutoRecorder/blob/514c95635e8b22a5f08f8dc1da51645916b2f6f2/main.py#L1011).
 
 ### Build an executable
 - Make sure you have fulfilled the following requirements:
@@ -105,9 +105,9 @@ After building the binary, copy the 'ttkthemes' folder from the site-packages fo
 8. Add support for modification and deletion of meeting services with repeatation flexibility in meetings.
 
 ### Preview
-[<img src="https://raw.githubusercontent.com/Microsoftlabs/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
+[<img src="https://raw.githubusercontent.com/rootCircle/Zoom-AutoRecorder/main/docs/screenshot_collage.jpg"
 alt="Screenshot"
-height="500">](https://github.com/Microsoftlabs/Zoom-AutoRecorder/tree/main/docs)
+height="500">](https://github.com/rootCircle/Zoom-AutoRecorder/tree/main/docs)
      
 ### Video
 [<img src="https://i.ytimg.com/vi/Tu31bdrZyW0/hqdefault.jpg"
