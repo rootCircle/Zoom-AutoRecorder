@@ -1,5 +1,13 @@
 ## [Zoom AutoRecorder](https://rootCircle.github.io/Zoom-AutoRecorder/)
 
+![GitHub all releases](https://img.shields.io/github/downloads/rootCircle/Zoom-AutoRecorder/total)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/rootCircle/Zoom-AutoRecorder)
+![GitHub Repo stars](https://img.shields.io/github/stars/rootCircle/Zoom-AutoRecorder)
+![GitHub License](https://img.shields.io/github/license/rootCircle/Zoom-AutoRecorder)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rootCircle/Zoom-AutoRecorder)
+![GitHub repo size](https://img.shields.io/github/repo-size/rootCircle/Zoom-AutoRecorder)
+
+
 ### Introduction
 Zoom Recorder is a free and open-source Python-based GUI-operated screen recorder and scheduler for Zoom meetings.
 It is a complete rewrite of [AutoRecorder](https://github.com/rootCircle/AutoRecorder) with an added GUI and fewer bugs, aimed at simplicity and ease of use while requiring minimal user details and program configuration across all platforms.
