@@ -25,11 +25,17 @@ try:
             print(er)
 
     now = datetime.now()
-    formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
+    formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    LOG_FILE = os.path.join(os.path.dirname(__file__), LOG_FILE_FOLDER, "log.log")  # Log File init
+    LOG_FILE = os.path.join(
+        os.path.dirname(__file__), LOG_FILE_FOLDER, "log.log"
+    )  # Log File init
 
-    print(formatted_date, "============PROGRAM STARTS============", file=open(LOG_FILE, 'a'))
+    print(
+        formatted_date,
+        "============PROGRAM STARTS============",
+        file=open(LOG_FILE, "a"),
+    )
 except Exception as e:
     print("ERROR", e)
     import sys
@@ -45,7 +51,6 @@ try:
     from PIL import Image, ImageTk
     import time
     import sqlite3
-    import subprocess
     import math
     import platform
     import threading
@@ -56,8 +61,8 @@ except Exception as ex:
         if e.errno != errno.EEXIST:
             print(e)
     now = datetime.now()
-    formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
-    print(formatted_date, "Import Error\t", ex, file=open(LOG_FILE, 'a'))
+    formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+    print(formatted_date, "Import Error\t", ex, file=open(LOG_FILE, "a"))
     import sys
 
     sys.exit()
@@ -65,16 +70,17 @@ except Exception as ex:
 """
 Image Files Directories
 """
-LOGOImgDir = os.path.join(os.path.dirname(__file__),"data", "logonew.png")
-DEFAULTIMAGEDir = os.path.join(os.path.dirname(__file__),"data", "Additem.png")
-HOMEPAGEImgDir = os.path.join(os.path.dirname(__file__),"data", "logo.png")
-BANNERImgDir = os.path.join(os.path.dirname(__file__),"data", "banner.png")
+LOGOImgDir = os.path.join(os.path.dirname(__file__), "data", "logonew.png")
+DEFAULTIMAGEDir = os.path.join(os.path.dirname(__file__), "data", "Additem.png")
+HOMEPAGEImgDir = os.path.join(os.path.dirname(__file__), "data", "logo.png")
+BANNERImgDir = os.path.join(os.path.dirname(__file__), "data", "banner.png")
 
-HOMEIconDir = [os.path.join(os.path.dirname(__file__),"data", "createService.png"),
-               os.path.join(os.path.dirname(__file__), "data", "viewService.png"),
-               os.path.join(os.path.dirname(__file__),"data", "autoloadService.png"),
-               os.path.join(os.path.dirname(__file__),"data", "setting.png")]
-
+HOMEIconDir = [
+    os.path.join(os.path.dirname(__file__), "data", "createService.png"),
+    os.path.join(os.path.dirname(__file__), "data", "viewService.png"),
+    os.path.join(os.path.dirname(__file__), "data", "autoloadService.png"),
+    os.path.join(os.path.dirname(__file__), "data", "setting.png"),
+]
 
 
 CHOOSENMEETDATA = {}
@@ -104,11 +110,11 @@ class LoadingPage(tk.Label):
                 pass  # we're done
 
             try:
-                self.delay = im.info['duration']
+                self.delay = im.info["duration"]
             except KeyError:
                 self.delay = 100
 
-            first = seq[0].convert('RGBA')
+            first = seq[0].convert("RGBA")
             self.frames = [ImageTk.PhotoImage(first)]
 
             tk.Label.__init__(self, master, image=self.frames[0])
@@ -116,7 +122,7 @@ class LoadingPage(tk.Label):
             temp = seq[0]
             for image in seq[1:]:
                 temp.paste(image)
-                frame = temp.convert('RGBA')
+                frame = temp.convert("RGBA")
                 self.frames.append(ImageTk.PhotoImage(frame))
 
             self.idx = 0
@@ -159,7 +165,12 @@ class LoadingPage(tk.Label):
                 # y = self.winfo_y()
 
                 screen.geometry(
-                    "+%d+%d" % (screen_width // 2 - gifhalfdimension[0], screen_height - 3 * gifhalfdimension[1]))
+                    "+%d+%d"
+                    % (
+                        screen_width // 2 - gifhalfdimension[0],
+                        screen_height - 3 * gifhalfdimension[1],
+                    )
+                )
                 # screen.lift()
                 screen.resizable(0, 0)
                 if grab:
@@ -182,7 +193,7 @@ class LoadingPage(tk.Label):
                     del LOADING_SCREENS[-1]
                 except IndexError as er:
                     Apptools.writeLog(er)
-                    globals()['LOADING_SCREENS'] = []
+                    globals()["LOADING_SCREENS"] = []
             else:
                 time.sleep(0.1)  # To avoid collission with other function calls
                 LoadingPage.stop_it(self)
@@ -213,7 +224,6 @@ class LoadingPage(tk.Label):
 
 
 class Apptools:
-
     def sqlite3_run(self, *sqlite_query):
         """
         The function will take multiple queries and output the result in
@@ -246,7 +256,19 @@ class Apptools:
             if sqliteConnection:
                 sqliteConnection.close()
 
-    def image_Show(self, Dir, xrow, ycolumn, width, height, mode="grid", rspan=1, cspan=1, px=0, py=0):
+    def image_Show(
+        self,
+        Dir,
+        xrow,
+        ycolumn,
+        width,
+        height,
+        mode="grid",
+        rspan=1,
+        cspan=1,
+        px=0,
+        py=0,
+    ):
         try:
             Photo = Image.open(Dir)
         except Exception as e:
@@ -256,8 +278,16 @@ class Apptools:
         render = ImageTk.PhotoImage(Photo)
         img = tk.Label(self, image=render)
         img.image = render
-        if mode == 'grid':
-            img.grid(row=xrow, column=ycolumn, rowspan=rspan, columnspan=cspan, padx=px, pady=py, sticky="ns")
+        if mode == "grid":
+            img.grid(
+                row=xrow,
+                column=ycolumn,
+                rowspan=rspan,
+                columnspan=cspan,
+                padx=px,
+                pady=py,
+                sticky="ns",
+            )
         else:
             img.place(x=xrow, y=ycolumn, relx=0, rely=0)
 
@@ -280,13 +310,13 @@ class Apptools:
 
     def writeLog(msg):
         now = datetime.now()
-        formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
+        formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
         try:
             os.makedirs(LOG_FILE_FOLDER)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 Apptools.writeLog(e)
-        f = open(LOG_FILE, 'a')
+        f = open(LOG_FILE, "a")
         print(formatted_date, msg, file=f)
         f.flush()
         f.close()
@@ -307,46 +337,52 @@ class App(tk.Tk):
 
 
 class ScrollableFrame(ttk.Frame):
-
     def __init__(self, container, cw=775, ch=500, showscrlbar=True, *args, **kwargs):
         super().__init__(container, *args, **kwargs)
         self.canvas = tk.Canvas(self, bg="#333333", highlightthickness=0)
         self.canvas.config(scrollregion=(0, 0, 900, 1000))
         if showscrlbar:
-            vscrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
-            hscrollbar = ttk.Scrollbar(self, orient="horizontal", command=self.canvas.xview)
+            vscrollbar = ttk.Scrollbar(
+                self, orient="vertical", command=self.canvas.yview
+            )
+            hscrollbar = ttk.Scrollbar(
+                self, orient="horizontal", command=self.canvas.xview
+            )
 
         s = ttk.Style()
-        s.configure('TFrame', background='#333333')
+        s.configure("TFrame", background="#333333")
 
         self.scrollable_frame = ttk.Frame(self.canvas)
 
         self.scrollable_frame.bind(
             "<Configure>",
-            lambda e: self.canvas.configure(
-                scrollregion=self.canvas.bbox("all")
-            )
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")),
         )
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
         self._canvasWidth = cw
         self._canvasHeight = ch
-        self.canvas.config(width=self._canvasWidth, height=self._canvasHeight,
-                           scrollregion=(0, 0, self._canvasWidth, self._canvasHeight))
+        self.canvas.config(
+            width=self._canvasWidth,
+            height=self._canvasHeight,
+            scrollregion=(0, 0, self._canvasWidth, self._canvasHeight),
+        )
         if showscrlbar:
-            self.canvas.configure(yscrollcommand=vscrollbar.set, xscrollcommand=hscrollbar.set)
+            self.canvas.configure(
+                yscrollcommand=vscrollbar.set, xscrollcommand=hscrollbar.set
+            )
 
         self.canvas.grid(row=0, column=0)
         if showscrlbar:
-            vscrollbar.grid(row=0, column=1, rowspan=2, sticky='nse')
-            hscrollbar.grid(row=1, column=0, sticky='wse')
+            vscrollbar.grid(row=0, column=1, rowspan=2, sticky="nse")
+            hscrollbar.grid(row=1, column=0, sticky="wse")
 
-            self.canvas.bind('<Enter>', self._bound_to_mousewheel)
-            self.canvas.bind('<Leave>', self._unbound_to_mousewheel)
+            self.canvas.bind("<Enter>", self._bound_to_mousewheel)
+            self.canvas.bind("<Leave>", self._unbound_to_mousewheel)
 
         return None
 
     def _bound_to_mousewheel(self, event):
-        globals()['count'] = 0
+        globals()["count"] = 0
         self.canvas.bind("<MouseWheel>", self.MouseWheelHandler)
         self.canvas.bind("<Button-4>", self.MouseWheelHandler)
         self.canvas.bind("<Button-5>", self.MouseWheelHandler)
@@ -362,6 +398,7 @@ class ScrollableFrame(ttk.Frame):
             return
         self.canvas.yview_scroll(-1, "units")
 
+
 class HomePage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master, bg="#333333")
@@ -372,9 +409,9 @@ class HomePage(tk.Frame):
     def makeWidgets(self, master):
         lbl = tk.Label(self, text="Zoom Auto Recorder")
         lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=0, column=0, columnspan=5, sticky='ew')
+        lbl.grid(row=0, column=0, columnspan=5, sticky="ew")
 
-        Apptools.image_Show(self, BANNERImgDir, 1, 0, 650, 150, cspan=2,py=10)
+        Apptools.image_Show(self, BANNERImgDir, 1, 0, 650, 150, cspan=2, py=10)
 
         row, col = 2, 0
         for i in range(len(HOMEIconDir)):
@@ -402,9 +439,13 @@ class HomePage(tk.Frame):
 
     def framechange(self, master, x):
         if x < len(HOMEIconDir):
-            master.switch_frame([CreateService, ViewService, LoadService, AppSettings][x])
+            master.switch_frame(
+                [CreateService, ViewService, LoadService, AppSettings][x]
+            )
         else:
-            messagebox.showwarning("Warning", "Some Error have occurred!\nContact devs with logs!")
+            messagebox.showwarning(
+                "Warning", "Some Error have occurred!\nContact devs with logs!"
+            )
 
 
 class CreateService(tk.Frame):
@@ -419,111 +460,156 @@ class CreateService(tk.Frame):
 
         lbl = tk.Label(self, text="Zoom Auto Recorder")
         lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=1, column=1, columnspan=5, sticky='ew')
+        lbl.grid(row=1, column=1, columnspan=5, sticky="ew")
 
         lbl = tk.Label(self, text="Enter Details")
         lbl.config(font=("Segoe UI", 18), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=2, column=1, columnspan=5, pady=20, sticky='ew')
+        lbl.grid(row=2, column=1, columnspan=5, pady=20, sticky="ew")
 
         lbl = tk.Label(self, text="Nickname")
         lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=3, column=1, sticky='ew', pady=5, padx=5)
+        lbl.grid(row=3, column=1, sticky="ew", pady=5, padx=5)
 
-        nickname = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-        nickname.grid(row=3, column=2, sticky='ew', columnspan=3)
+        nickname = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor="grey")
+        nickname.grid(row=3, column=2, sticky="ew", columnspan=3)
 
         lbl = tk.Label(self, text="Meeting ID")
         lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=4, column=1, sticky='ew', pady=5, padx=5)
+        lbl.grid(row=4, column=1, sticky="ew", pady=5, padx=5)
 
-        meetID = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-        meetID.grid(row=4, column=2, sticky='ew', columnspan=3)
+        meetID = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor="grey")
+        meetID.grid(row=4, column=2, sticky="ew", columnspan=3)
 
         lbl = tk.Label(self, text="Meeting Password")
         lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=5, column=1, padx=5, sticky='ew', pady=5)
+        lbl.grid(row=5, column=1, padx=5, sticky="ew", pady=5)
 
-        meetPassword = tk.Entry(self, show="●", fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-        meetPassword.grid(row=5, column=2, sticky='ew', columnspan=3)
+        meetPassword = tk.Entry(
+            self, show="●", fg="#E8E8E8", bg="#333333", highlightcolor="grey"
+        )
+        meetPassword.grid(row=5, column=2, sticky="ew", columnspan=3)
 
         lbl = tk.Label(self, text="Starting time\nhh:mm")
         lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=6, column=1, sticky='ew', padx=5, pady=5)
+        lbl.grid(row=6, column=1, sticky="ew", padx=5, pady=5)
 
-        startTimeHour = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey', width=10)
-        startTimeHour.grid(row=6, column=2, sticky='ew', padx=3)
+        startTimeHour = tk.Entry(
+            self, fg="#E8E8E8", bg="#333333", highlightcolor="grey", width=10
+        )
+        startTimeHour.grid(row=6, column=2, sticky="ew", padx=3)
 
-        startTimeMinute = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey', width=10)
-        startTimeMinute.grid(row=6, column=3, sticky='ew')
+        startTimeMinute = tk.Entry(
+            self, fg="#E8E8E8", bg="#333333", highlightcolor="grey", width=10
+        )
+        startTimeMinute.grid(row=6, column=3, sticky="ew")
 
-        startTime_am_pm = tk.StringVar(self, 'AM')
-        options = ['AM', 'AM', 'PM']
+        startTime_am_pm = tk.StringVar(self, "AM")
+        options = ["AM", "AM", "PM"]
         Menu = ttk.OptionMenu(self, startTime_am_pm, *options)
         Menu.grid(row=6, column=4)
 
         lbl = tk.Label(self, text="Meeting Length\nin min")
         lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=7, column=1, sticky='ew', padx=5, pady=5)
+        lbl.grid(row=7, column=1, sticky="ew", padx=5, pady=5)
 
-        meetLength = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-        meetLength.grid(row=7, column=2, sticky='ew', columnspan=3)
+        meetLength = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor="grey")
+        meetLength.grid(row=7, column=2, sticky="ew", columnspan=3)
 
         """
         Default Engine
         Update Frequency : Every 1 minute
         Warmup Time : 5 minutes
         """
-        self.useCustomEngine = StringVar(self, 'False')
-        cbtn = ttk.Checkbutton(self, text='Use Custom Engine?', variable=self.useCustomEngine, onvalue='True',
-                               offvalue='False')
+        self.useCustomEngine = StringVar(self, "False")
+        cbtn = ttk.Checkbutton(
+            self,
+            text="Use Custom Engine?",
+            variable=self.useCustomEngine,
+            onvalue="True",
+            offvalue="False",
+        )
         cbtn.config(command=self.showCustomEngine)
-        cbtn.grid(row=8, column=1, sticky='ew', padx=5, pady=5)
+        cbtn.grid(row=8, column=1, sticky="ew", padx=5, pady=5)
 
-        self.isFreeMeet = StringVar(self, 'False')
-        cbtn = ttk.Checkbutton(self, text='Using Free Meet?', variable=self.isFreeMeet, onvalue='True',
-                               offvalue='False')
+        self.isFreeMeet = StringVar(self, "False")
+        cbtn = ttk.Checkbutton(
+            self,
+            text="Using Free Meet?",
+            variable=self.isFreeMeet,
+            onvalue="True",
+            offvalue="False",
+        )
         cbtn.config(command=self.showFreeDialog)
-        cbtn.grid(row=8, column=2, sticky='ew', padx=5, pady=5, columnspan=2)
+        cbtn.grid(row=8, column=2, sticky="ew", padx=5, pady=5, columnspan=2)
 
-        recordMeet = StringVar(self, 'True')
-        rec = ttk.Checkbutton(self, text='Record Meeting?', variable=recordMeet, onvalue='True', offvalue='False')
-        rec.grid(row=9, column=2, sticky='ew', padx=5, pady=5, columnspan=2)
+        recordMeet = StringVar(self, "True")
+        rec = ttk.Checkbutton(
+            self,
+            text="Record Meeting?",
+            variable=recordMeet,
+            onvalue="True",
+            offvalue="False",
+        )
+        rec.grid(row=9, column=2, sticky="ew", padx=5, pady=5, columnspan=2)
 
-        btn = tk.Button(self, text="Create Service",
-                        command=lambda: self.createService(master, data={'nickname': nickname.get(),
-                                                                         'meetID': meetID.get(),
-                                                                         'meetPassword': meetPassword.get(),
-                                                                         'startTimeHour': startTimeHour.get(),
-                                                                         'startTimeMinute': startTimeMinute.get(),
-                                                                         'startTime_am_pm': startTime_am_pm.get(),
-                                                                         'rejoinInterval': self.rejoinInterval.get() if self.isFreeMeet.get() == 'True' else '0',
-                                                                         'updateFrequency': self.updateFrequency.get() if self.useCustomEngine.get() == 'True' else '1',
-                                                                         'warmUpDuration': self.warmUpDuration.get() if self.useCustomEngine.get() == 'True' else '5',
-                                                                         'meetLength': meetLength.get(),
-                                                                         'recordMeet': recordMeet.get()}))
-        btn.config(bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9")
-        btn.grid(row=13, column=5, padx=15, pady=15, sticky='nw')
+        btn = tk.Button(
+            self,
+            text="Create Service",
+            command=lambda: self.createService(
+                master,
+                data={
+                    "nickname": nickname.get(),
+                    "meetID": meetID.get(),
+                    "meetPassword": meetPassword.get(),
+                    "startTimeHour": startTimeHour.get(),
+                    "startTimeMinute": startTimeMinute.get(),
+                    "startTime_am_pm": startTime_am_pm.get(),
+                    "rejoinInterval": self.rejoinInterval.get()
+                    if self.isFreeMeet.get() == "True"
+                    else "0",
+                    "updateFrequency": self.updateFrequency.get()
+                    if self.useCustomEngine.get() == "True"
+                    else "1",
+                    "warmUpDuration": self.warmUpDuration.get()
+                    if self.useCustomEngine.get() == "True"
+                    else "5",
+                    "meetLength": meetLength.get(),
+                    "recordMeet": recordMeet.get(),
+                },
+            ),
+        )
+        btn.config(
+            bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9"
+        )
+        btn.grid(row=13, column=5, padx=15, pady=15, sticky="nw")
 
-        btn = tk.Button(self, text="Go to Homepage",
-                        command=lambda: master.switch_frame(HomePage))
-        btn.config(bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9")
-        btn.grid(row=14, column=1, columnspan=5, padx=15, pady=15, sticky='nsew')
+        btn = tk.Button(
+            self, text="Go to Homepage", command=lambda: master.switch_frame(HomePage)
+        )
+        btn.config(
+            bg="#1F8EE7", padx=7, pady=3, fg="#E8E8E8", bd=0, activebackground="#3297E9"
+        )
+        btn.grid(row=14, column=1, columnspan=5, padx=15, pady=15, sticky="nsew")
 
     def showCustomEngine(self):
-        if self.useCustomEngine.get() == 'True':
+        if self.useCustomEngine.get() == "True":
             self.CElbl1 = tk.Label(self, text="Warmup duration\nin min")
             self.CElbl1.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-            self.CElbl1.grid(row=10, column=1, sticky='ew', padx=5, pady=5)
+            self.CElbl1.grid(row=10, column=1, sticky="ew", padx=5, pady=5)
 
-            self.warmUpDuration = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-            self.warmUpDuration.grid(row=10, column=2, sticky='ew', columnspan=2)
+            self.warmUpDuration = tk.Entry(
+                self, fg="#E8E8E8", bg="#333333", highlightcolor="grey"
+            )
+            self.warmUpDuration.grid(row=10, column=2, sticky="ew", columnspan=2)
 
             self.CElbl2 = tk.Label(self, text="Update frequency\nin min")
             self.CElbl2.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-            self.CElbl2.grid(row=11, column=1, sticky='ew', padx=5, pady=5)
+            self.CElbl2.grid(row=11, column=1, sticky="ew", padx=5, pady=5)
 
-            self.updateFrequency = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-            self.updateFrequency.grid(row=11, column=2, sticky='ew', columnspan=2)
+            self.updateFrequency = tk.Entry(
+                self, fg="#E8E8E8", bg="#333333", highlightcolor="grey"
+            )
+            self.updateFrequency.grid(row=11, column=2, sticky="ew", columnspan=2)
         else:
             try:
                 self.updateFrequency.destroy()
@@ -534,13 +620,15 @@ class CreateService(tk.Frame):
                 pass
 
     def showFreeDialog(self):
-        if self.isFreeMeet.get() == 'True':
+        if self.isFreeMeet.get() == "True":
             self.FDlbl = tk.Label(self, text="Rejoin Time\nin min\n(If free user)")
             self.FDlbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-            self.FDlbl.grid(row=12, column=1, sticky='ew', padx=5, pady=5)
+            self.FDlbl.grid(row=12, column=1, sticky="ew", padx=5, pady=5)
 
-            self.rejoinInterval = tk.Entry(self, fg="#E8E8E8", bg="#333333", highlightcolor='grey')
-            self.rejoinInterval.grid(row=12, column=2, sticky='ew', columnspan=2)
+            self.rejoinInterval = tk.Entry(
+                self, fg="#E8E8E8", bg="#333333", highlightcolor="grey"
+            )
+            self.rejoinInterval.grid(row=12, column=2, sticky="ew", columnspan=2)
         else:
             try:
                 self.rejoinInterval.destroy()
@@ -554,9 +642,12 @@ class CreateService(tk.Frame):
             if data["rejoinInterval"] is None:
                 data["rejoinInterval"] = "0"
             data["startTimeHour"] = int(data["startTimeHour"])
-            data["startTimeHour"] = data["startTimeHour"] if data["startTime_am_pm"] == 'AM' or data[
-                "startTimeHour"] == 12 else data["startTimeHour"] + 12
-            del data['startTime_am_pm']
+            data["startTimeHour"] = (
+                data["startTimeHour"]
+                if data["startTime_am_pm"] == "AM" or data["startTimeHour"] == 12
+                else data["startTimeHour"] + 12
+            )
+            del data["startTime_am_pm"]
             if self.writeDataToStorage(data) is not None:
                 messagebox.showinfo("Success", "Services created successfully!")
                 return True
@@ -569,63 +660,79 @@ class CreateService(tk.Frame):
             elif isValidData == -2:
                 messagebox.showwarning("Warning", "Please enter valid time range")
             elif isValidData == -3:
-                messagebox.showwarning("Warning", "Update frequency should be less than warmup time.")
+                messagebox.showwarning(
+                    "Warning", "Update frequency should be less than warmup time."
+                )
             elif isValidData == -4:
-                messagebox.showwarning("Warning", "Update frequency should be non zero.")
+                messagebox.showwarning(
+                    "Warning", "Update frequency should be non zero."
+                )
             elif isValidData == -5:
                 messagebox.showwarning("Warning", "Invalid Meeting Length.")
 
     def validateData(self, data):
         for key in data.keys():
-            if not (data[key] and Apptools.is_not_null(data[key])) and key != 'rejoinInterval':
+            if (
+                not (data[key] and Apptools.is_not_null(data[key]))
+                and key != "rejoinInterval"
+            ):
                 return 0
-            elif (key not in ['meetPassword', 'nickname', 'recordMeet', 'startTime_am_pm'] and not (
-                    data[key].isdigit())):
-                if key == 'rejoinInterval' and not (data[key]):
+            elif key not in [
+                "meetPassword",
+                "nickname",
+                "recordMeet",
+                "startTime_am_pm",
+            ] and not (data[key].isdigit()):
+                if key == "rejoinInterval" and not (data[key]):
                     continue
                 return -1
 
         else:
-            if not (0 <= int(data['startTimeHour']) <= 12) or (
-                    int(data['startTimeHour']) == 12 and data['startTime_am_pm'] == 'AM'):
+            if not (0 <= int(data["startTimeHour"]) <= 12) or (
+                int(data["startTimeHour"]) == 12 and data["startTime_am_pm"] == "AM"
+            ):
                 return -2
-            if not (0 <= int(data['startTimeMinute']) < 60):
+            if not (0 <= int(data["startTimeMinute"]) < 60):
                 return -2
-            if int(data['updateFrequency']) >= int(data['warmUpDuration']):
+            if int(data["updateFrequency"]) >= int(data["warmUpDuration"]):
                 return -3
-            if int(data['updateFrequency']) == 0:
+            if int(data["updateFrequency"]) == 0:
                 return -4
-            if int(data['meetLength']) <= 0:
+            if int(data["meetLength"]) <= 0:
                 return -5
         return 1
 
     def writeDataToStorage(self, data):
-        DEFAULTQUERY = "CREATE TABLE IF NOT EXISTS SERVICES(" \
-                       "nickname TEXT NOT NULL," \
-                       " meetID TEXT NOT NULL PRIMARY KEY," \
-                       " meetPassword TEXT NOT NULL," \
-                       " startTimeHour INT NOT NULL," \
-                       " startTimeMinute INT Not Null," \
-                       " rejoinInterval INTEGER NOT NULL," \
-                       " updateFrequency INTEGER NOT NULL," \
-                       " warmUpDuration INTEGER NOT NULL," \
-                       " meetLength INTEGER NOT NULL," \
-                       " recordMeet TEXT NOT NULL);"
+        DEFAULTQUERY = (
+            "CREATE TABLE IF NOT EXISTS SERVICES("
+            "nickname TEXT NOT NULL,"
+            " meetID TEXT NOT NULL PRIMARY KEY,"
+            " meetPassword TEXT NOT NULL,"
+            " startTimeHour INT NOT NULL,"
+            " startTimeMinute INT Not Null,"
+            " rejoinInterval INTEGER NOT NULL,"
+            " updateFrequency INTEGER NOT NULL,"
+            " warmUpDuration INTEGER NOT NULL,"
+            " meetLength INTEGER NOT NULL,"
+            " recordMeet TEXT NOT NULL);"
+        )
 
         QUERYF1 = "select meetID from SERVICES where meetID = ?;"
-        out = Apptools.sqlite3_run(self, DEFAULTQUERY, (QUERYF1, (data['meetID'],)))
+        out = Apptools.sqlite3_run(self, DEFAULTQUERY, (QUERYF1, (data["meetID"],)))
         if out is not None:
             if not out[1]:
-                QUERYF2 = "Insert into SERVICES (nickname, meetID, meetPassword, " \
-                          "startTimeHour, startTimeMinute, rejoinInterval,updateFrequency," \
-                          "warmUpDuration,meetLength, recordMeet) values(?,?,?,?,?,?,?,?,?,?);"
+                QUERYF2 = (
+                    "Insert into SERVICES (nickname, meetID, meetPassword, "
+                    "startTimeHour, startTimeMinute, rejoinInterval,updateFrequency,"
+                    "warmUpDuration,meetLength, recordMeet) values(?,?,?,?,?,?,?,?,?,?);"
+                )
                 return Apptools.sqlite3_run(self, (QUERYF2, data.values()))
             elif out[1]:
                 messagebox.showwarning("Warning", "Duplicate Meeting ID!")
 
     def createAndLoadService(self, master, data):
         if self.createService(master, data):
-            globals()['CHOOSENMEETDATA'] = data
+            globals()["CHOOSENMEETDATA"] = data
             master.switch_frame(LoadService)
 
 
@@ -641,9 +748,9 @@ class ViewService(tk.Frame):
 
         lbl = tk.Label(self, text="Active Services")
         lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=0, column=1, sticky='ew')
+        lbl.grid(row=0, column=1, sticky="ew")
 
-        sep = ttk.Separator(self, orient='horizontal')
+        sep = ttk.Separator(self, orient="horizontal")
         sep.grid(row=1, column=1, sticky="ew")
 
         frame = ScrollableFrame(self, cw=400, ch=300)
@@ -651,28 +758,43 @@ class ViewService(tk.Frame):
         if out:
             r = 0
             for data in out:
-                mappedData = {'nickname': data[0],
-                              'meetID': data[1],
-                              'meetPassword': data[2],
-                              'startTimeHour': data[3],
-                              'startTimeMinute': data[4],
-                              'rejoinInterval': data[5],
-                              'updateFrequency': data[6],
-                              'warmUpDuration': data[7],
-                              'meetLength': data[8],
-                              'recordMeet': data[9]}
+                mappedData = {
+                    "nickname": data[0],
+                    "meetID": data[1],
+                    "meetPassword": data[2],
+                    "startTimeHour": data[3],
+                    "startTimeMinute": data[4],
+                    "rejoinInterval": data[5],
+                    "updateFrequency": data[6],
+                    "warmUpDuration": data[7],
+                    "meetLength": data[8],
+                    "recordMeet": data[9],
+                }
 
-                txt = "Nickname : " + mappedData['nickname'].title().strip()
-                txt += "\nMeeting ID : " + mappedData['meetID']
+                txt = "Nickname : " + mappedData["nickname"].title().strip()
+                txt += "\nMeeting ID : " + mappedData["meetID"]
 
-                am_pm = "AM" if mappedData['startTimeHour'] < 12 else "PM"
-                startshowhour = mappedData['startTimeHour'] if am_pm == "AM" or mappedData['startTimeHour'] == 12 \
-                    else mappedData['startTimeHour'] - 12
-                startshowmin = mappedData['startTimeMinute'] if mappedData['startTimeMinute'] != 0 else "00"
-                txt += "\nStarting Time : {0}:{1} {2}".format(startshowhour, startshowmin, am_pm)
+                am_pm = "AM" if mappedData["startTimeHour"] < 12 else "PM"
+                startshowhour = (
+                    mappedData["startTimeHour"]
+                    if am_pm == "AM" or mappedData["startTimeHour"] == 12
+                    else mappedData["startTimeHour"] - 12
+                )
+                startshowmin = (
+                    mappedData["startTimeMinute"]
+                    if mappedData["startTimeMinute"] != 0
+                    else "00"
+                )
+                txt += "\nStarting Time : {0}:{1} {2}".format(
+                    startshowhour, startshowmin, am_pm
+                )
 
-                txt += "\nMeeting Length : {0} min\n".format(mappedData['meetLength'])
-                txt += "No recording" if mappedData['recordMeet'] != 'True' else "Meeting will be recorded!"
+                txt += "\nMeeting Length : {0} min\n".format(mappedData["meetLength"])
+                txt += (
+                    "No recording"
+                    if mappedData["recordMeet"] != "True"
+                    else "Meeting will be recorded!"
+                )
 
                 btn = tk.Button(frame.scrollable_frame, text=txt)
                 btn.config(bg="#1F8EE7", padx=3, fg="#E8E8E8", bd=0, justify=tk.LEFT)
@@ -689,13 +811,17 @@ class ViewService(tk.Frame):
 
         frame.grid(row=2, column=1)
 
-        btn = tk.Button(self, text="AutoLoad Suitable Service",
-                        command=lambda: self.autoload(master, out))
+        btn = tk.Button(
+            self,
+            text="AutoLoad Suitable Service",
+            command=lambda: self.autoload(master, out),
+        )
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=3, column=1, padx=5, pady=10)
 
-        btn = tk.Button(self, text="Go to Homepage",
-                        command=lambda: master.switch_frame(HomePage))
+        btn = tk.Button(
+            self, text="Go to Homepage", command=lambda: master.switch_frame(HomePage)
+        )
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=4, column=1, padx=5, pady=10)
 
@@ -717,41 +843,53 @@ class ViewService(tk.Frame):
                 endTimeEarliestCall = startTimeEarliestCall + int(earliestCall[8])
 
                 if endTimeData >= currentTime:
-                    earliestCall = earliestCall if currentTime <= endTimeEarliestCall and \
-                                                   startTimeEarliestCall < startTimeData else data
+                    earliestCall = (
+                        earliestCall
+                        if currentTime <= endTimeEarliestCall
+                        and startTimeEarliestCall < startTimeData
+                        else data
+                    )
 
-            endTimeEarliestCall = int(earliestCall[3]) * 60 + int(earliestCall[4]) + int(earliestCall[8])
+            endTimeEarliestCall = (
+                int(earliestCall[3]) * 60 + int(earliestCall[4]) + int(earliestCall[8])
+            )
             if endTimeEarliestCall >= currentTime:
-                mappedData = {'nickname': earliestCall[0],
-                              'meetID': earliestCall[1],
-                              'meetPassword': earliestCall[2],
-                              'startTimeHour': earliestCall[3],
-                              'startTimeMinute': earliestCall[4],
-                              'rejoinInterval': earliestCall[5],
-                              'updateFrequency': earliestCall[6],
-                              'warmUpDuration': earliestCall[7],
-                              'meetLength': earliestCall[8],
-                              'recordMeet': earliestCall[9]}
-                globals()['CHOOSENMEETDATA'] = mappedData
+                mappedData = {
+                    "nickname": earliestCall[0],
+                    "meetID": earliestCall[1],
+                    "meetPassword": earliestCall[2],
+                    "startTimeHour": earliestCall[3],
+                    "startTimeMinute": earliestCall[4],
+                    "rejoinInterval": earliestCall[5],
+                    "updateFrequency": earliestCall[6],
+                    "warmUpDuration": earliestCall[7],
+                    "meetLength": earliestCall[8],
+                    "recordMeet": earliestCall[9],
+                }
+                globals()["CHOOSENMEETDATA"] = mappedData
                 if not externalCall:
                     master.switch_frame(LoadService)
             elif not externalCall:
-                messagebox.showinfo("Warning", "Services Expired\nCome tomorrow or create one!")
+                messagebox.showinfo(
+                    "Warning", "Services Expired\nCome tomorrow or create one!"
+                )
         elif not externalCall:
             messagebox.showwarning("Warning", "No Service Exists\nCreate One!")
 
     def getDataFromStorage(self):
-        DEFAULTQUERY = "CREATE TABLE IF NOT EXISTS SERVICES(" \
-                       "nickname TEXT NOT NULL," \
-                       " meetID TEXT NOT NULL PRIMARY KEY," \
-                       " meetPassword TEXT NOT NULL," \
-                       " startTimeHour INT NOT NULL," \
-                       " startTimeMinute INT Not Null," \
-                       " rejoinInterval INTEGER NOT NULL," \
-                       " updateFrequency INTEGER NOT NULL," \
-                       " warmUpDuration INTEGER NOT NULL," \
-                       " meetLength INTEGER NOT NULL," \
-                       " recordMeet TEXT NOT NULL);"
+        DEFAULTQUERY = (
+            "CREATE TABLE IF NOT EXISTS SERVICES("
+            "nickname TEXT NOT NULL,"
+            " meetID TEXT NOT NULL PRIMARY KEY,"
+            " meetPassword TEXT NOT NULL,"
+            " startTimeHour INT NOT NULL,"
+            " startTimeMinute INT Not Null,"
+            " rejoinInterval INTEGER NOT NULL,"
+            " updateFrequency INTEGER NOT NULL,"
+            " warmUpDuration INTEGER NOT NULL,"
+            " meetLength INTEGER NOT NULL,"
+            " recordMeet TEXT NOT NULL);"
+        )
 
         QUERYF1 = "select * from SERVICES;"
         out = Apptools.sqlite3_run(self, DEFAULTQUERY, QUERYF1)
@@ -760,7 +898,7 @@ class ViewService(tk.Frame):
 
     @staticmethod
     def framechange(master, data):
-        globals()['CHOOSENMEETDATA'] = data
+        globals()["CHOOSENMEETDATA"] = data
         master.switch_frame(LoadService)
 
 
@@ -774,52 +912,67 @@ class LoadService(tk.Frame):
     def makeWidgets(self, master):
         lbl = tk.Label(self, text="Loading Meeting...")
         lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=0, column=0, sticky='ew')
+        lbl.grid(row=0, column=0, sticky="ew")
 
-        sep = ttk.Separator(self, orient='horizontal')
+        sep = ttk.Separator(self, orient="horizontal")
         sep.grid(row=1, column=1, sticky="ew")
 
         if not CHOOSENMEETDATA:
             out = ViewService.getDataFromStorage(self)
             ViewService.autoload(self, master, out, externalCall=True)
 
-
         if CHOOSENMEETDATA:
-
             consoleText = "Initialising..."
 
             console = tk.Label(self, text=consoleText)
             console.config(font=("Segoe UI", 6), fg="#E8E8E8", bg="#333333")
-            console.grid(row=2, column=0, sticky='nsew')
+            console.grid(row=2, column=0, sticky="nsew")
 
-            am_pm = "AM" if CHOOSENMEETDATA['startTimeHour'] < 12 else "PM"
-            startshowhour = CHOOSENMEETDATA['startTimeHour'] if am_pm == "AM" or CHOOSENMEETDATA['startTimeHour'] == 12 \
-                else CHOOSENMEETDATA['startTimeHour'] - 12
-            startshowmin = CHOOSENMEETDATA['startTimeMinute'] if CHOOSENMEETDATA['startTimeMinute'] != 0 else "00"
+            am_pm = "AM" if CHOOSENMEETDATA["startTimeHour"] < 12 else "PM"
+            startshowhour = (
+                CHOOSENMEETDATA["startTimeHour"]
+                if am_pm == "AM" or CHOOSENMEETDATA["startTimeHour"] == 12
+                else CHOOSENMEETDATA["startTimeHour"] - 12
+            )
+            startshowmin = (
+                CHOOSENMEETDATA["startTimeMinute"]
+                if CHOOSENMEETDATA["startTimeMinute"] != 0
+                else "00"
+            )
 
-            lbl = tk.Label(self, text="Waiting for the meeting to start at time {0}:{1} {2}"
-                           .format(startshowhour, startshowmin, am_pm))
+            lbl = tk.Label(
+                self,
+                text="Waiting for the meeting to start at time {0}:{1} {2}".format(
+                    startshowhour, startshowmin, am_pm
+                ),
+            )
             lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-            lbl.grid(row=3, column=0, sticky='ew')
+            lbl.grid(row=3, column=0, sticky="ew")
 
-            txt = "Nickname : " + CHOOSENMEETDATA['nickname'].title().strip()
-            txt += "\nMeeting ID : " + CHOOSENMEETDATA['meetID']
-            txt += "\nStarting Time : {0}:{1} {2}".format(startshowhour, startshowmin, am_pm)
-            txt += "\nMeeting Length : {0} min".format(CHOOSENMEETDATA['meetLength'])
+            txt = "Nickname : " + CHOOSENMEETDATA["nickname"].title().strip()
+            txt += "\nMeeting ID : " + CHOOSENMEETDATA["meetID"]
+            txt += "\nStarting Time : {0}:{1} {2}".format(
+                startshowhour, startshowmin, am_pm
+            )
+            txt += "\nMeeting Length : {0} min".format(CHOOSENMEETDATA["meetLength"])
 
             btn = tk.Button(self, text="Meeting Details:\n" + txt)
             btn.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
-            btn.grid(row=5, column=0, sticky='ew')
+            btn.grid(row=5, column=0, sticky="ew")
 
             consoleText += "\n[Loading 10%] Create Zoom Link"
             console.config(text=consoleText)
 
-            MeetLink = self.createMeetLink(CHOOSENMEETDATA['meetID'], CHOOSENMEETDATA['meetPassword'])
+            MeetLink = self.createMeetLink(
+                CHOOSENMEETDATA["meetID"], CHOOSENMEETDATA["meetPassword"]
+            )
             if MeetLink:
                 consoleText += "\n[Loading 20%] Zoom Link Created\n" + MeetLink
                 console.config(text=consoleText)
 
-                consoleText += "\n[Loading 30%] Computing Time Ranges for triggering Response"
+                consoleText += (
+                    "\n[Loading 30%] Computing Time Ranges for triggering Response"
+                )
                 console.config(text=consoleText)
 
                 timeRange = self.checkTimeRange(CHOOSENMEETDATA)
@@ -841,35 +994,47 @@ class LoadService(tk.Frame):
                 consoleText += "\n[Loading 10%] Oops Error Occurred while creating Meet link\nRetry Later"
                 console.config(text=consoleText)
 
-            btn = tk.Button(self, text="Start Service",
-                            command=lambda: self.processing(MeetLink, timeRange, console, consoleText))
+            btn = tk.Button(
+                self,
+                text="Start Service",
+                command=lambda: self.processing(
+                    MeetLink, timeRange, console, consoleText
+                ),
+            )
             btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
             btn.grid(row=6, column=0, padx=5, pady=10)
 
-            btn = tk.Button(self, text="Reload Page",
-                            command=lambda: master.switch_frame(LoadService))
+            btn = tk.Button(
+                self,
+                text="Reload Page",
+                command=lambda: master.switch_frame(LoadService),
+            )
             btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
             btn.grid(row=7, column=0, padx=5, pady=10)
         else:
             lbl = tk.Label(self, text="No meeting selected!\nChoose one")
             lbl.config(font=("Segoe UI", 15), fg="#E8E8E8", bg="#333333")
-            lbl.grid(row=2, column=0, sticky='ew')
+            lbl.grid(row=2, column=0, sticky="ew")
 
-        btn = tk.Button(self, text="Go to Home",
-                        command=lambda: master.switch_frame(HomePage))
+        btn = tk.Button(
+            self, text="Go to Home", command=lambda: master.switch_frame(HomePage)
+        )
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=8, column=0, padx=5, pady=10)
 
-        sep = ttk.Separator(self, orient='horizontal')
+        sep = ttk.Separator(self, orient="horizontal")
         sep.grid(row=9, column=0, sticky="ew")
 
-        lbl = tk.Label(self, text="If you close the app even then OBS Studio recording "
-                                  "will continue \nif initiated. (to avoid conflict of interest)"
-                                  "\nYou need to manually close it or after a pre-assigned value"
-                                  " decided by threading module.\n"
-                                  "(NEEDS PROPER REVIEW)[UNSTABLE]")
+        lbl = tk.Label(
+            self,
+            text="If you close the app even then OBS Studio recording "
+            "will continue \nif initiated. (to avoid conflict of interest)"
+            "\nYou need to manually close it or after a pre-assigned value"
+            " decided by threading module.\n"
+            "(NEEDS PROPER REVIEW)[UNSTABLE]",
+        )
         lbl.config(font=("Segoe UI", 8), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=10, column=0, sticky='ew')
+        lbl.grid(row=10, column=0, sticky="ew")
 
     def processing(self, *args):
         LoadingPage.perform(self, (self, self.service, *args))
@@ -883,81 +1048,103 @@ class LoadService(tk.Frame):
 
             counter = True
             while currentTime <= timeRange[0][1]:
-                currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
+                currentTime = (
+                    datetime.now().time().hour * 60 + datetime.now().time().minute
+                )
                 if timeRange[0][0] <= currentTime <= timeRange[0][1]:
                     if counter:
                         counter = False
-                        t3 = threading.Thread(target=LoadService.launchRecordingbyOBS,
-                                              args=(self, CHOOSENMEETDATA['recordMeet']))
+                        t3 = threading.Thread(
+                            target=LoadService.launchRecordingbyOBS,
+                            args=(self, CHOOSENMEETDATA["recordMeet"]),
+                        )
                         t3.start()
 
                     if self.launchMeeting(meetLink, timeRange):
-                        rejoinInterval = CHOOSENMEETDATA['rejoinInterval']
-                        if Apptools.check_digit(rejoinInterval) and int(rejoinInterval) > 0:
+                        rejoinInterval = CHOOSENMEETDATA["rejoinInterval"]
+                        if (
+                            Apptools.check_digit(rejoinInterval)
+                            and int(rejoinInterval) > 0
+                        ):
                             rejoinInterval = int(rejoinInterval)
-                            rejoinTimeLength = rejoinInterval - (currentTime - timeRange[0][0]) % rejoinInterval
+                            rejoinTimeLength = (
+                                rejoinInterval
+                                - (currentTime - timeRange[0][0]) % rejoinInterval
+                            )
                         else:
                             rejoinTimeLength = 0
                         timeLeft = timeRange[0][1] - currentTime
 
-                        sleepDuration = rejoinTimeLength if rejoinTimeLength > 0 else timeLeft
+                        sleepDuration = (
+                            rejoinTimeLength if rejoinTimeLength > 0 else timeLeft
+                        )
 
                         time.sleep(sleepDuration * 60)
                     else:
-
-                        updateFrequency = int(CHOOSENMEETDATA['updateFrequency'])
-                        consoleText += "\nError! Retrying after some time" \
-                                       "\nSleeping for another {} minutes".format(updateFrequency)
+                        updateFrequency = int(CHOOSENMEETDATA["updateFrequency"])
+                        consoleText += (
+                            "\nError! Retrying after some time"
+                            "\nSleeping for another {} minutes".format(updateFrequency)
+                        )
                         console.config(text=consoleText)
 
                         time.sleep(updateFrequency * 60)
 
-                    currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
+                    currentTime = (
+                        datetime.now().time().hour * 60 + datetime.now().time().minute
+                    )
                     endTime = timeRange[0][1]
 
                     if currentTime >= endTime:
-                        self.endOBSRecording(CHOOSENMEETDATA['recordMeet'])
+                        self.endOBSRecording(CHOOSENMEETDATA["recordMeet"])
                         consoleText += "\nMeeting Ended!"
                         console.config(text=consoleText)
 
                         lbl = tk.Label(self, text="Rate Your Experience🟊")
                         lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-                        lbl.grid(row=3, column=0, sticky='ew')
+                        lbl.grid(row=3, column=0, sticky="ew")
 
                         return
                 else:
-                    updateFrequency = int(CHOOSENMEETDATA['updateFrequency'])
-                    consoleText += "\n Sleeping for another {} minutes".format(updateFrequency)
+                    updateFrequency = int(CHOOSENMEETDATA["updateFrequency"])
+                    consoleText += "\n Sleeping for another {} minutes".format(
+                        updateFrequency
+                    )
                     console.config(text=consoleText)
                     time.sleep(updateFrequency * 60)
             else:
-                consoleText += "\nOut of Service\nIf that's a possible error retry after some time"
+                consoleText += (
+                    "\nOut of Service\nIf that's a possible error retry after some time"
+                )
                 console.config(text=consoleText)
 
                 lbl = tk.Label(self, text="Meeting Ended possibly!")
                 lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-                lbl.grid(row=3, column=0, sticky='ew')
+                lbl.grid(row=3, column=0, sticky="ew")
 
     def createMeetLink(self, meetID, meetPassword=""):
         # Creates zoommtg link doesn't require browser permission (more safe.Hope so!)
         if isinstance(meetID, int) or (isinstance(meetID, str) and meetID.isdigit()):
             pass_param = "&pwd={}".format(meetPassword) if (meetPassword) else ""
-            meeting_link = "zoommtg://zoom.us/join?action=join&confno={0}{1}".format(meetID, pass_param)
+            meeting_link = "zoommtg://zoom.us/join?action=join&confno={0}{1}".format(
+                meetID, pass_param
+            )
             return meeting_link
 
     # Adopted from: https://github.com/tmonfre/zoom-cli/blob/main/zoom_cli/utils.py
     def launchZoommtgUrl(self, url):
         command = ""
-        if platform.system() == 'Darwin':
+        if platform.system() == "Darwin":
             command = "open"
-        elif platform.system() == 'Linux':
+        elif platform.system() == "Linux":
             command = "xdg-open"
-        elif platform.system() == 'Windows':
+        elif platform.system() == "Windows":
             command = "cmd /c start"  # Not Sure About This Need Checking
             # If error replace command with 'start' and retry or use webbrowser one
         else:
             try:
                 import webbrowser
+
                 webbrowser.open(url)
             except:
                 pass
@@ -966,11 +1153,15 @@ class LoadService(tk.Frame):
 
     def checkTimeRange(self, data):
         # Creates Possible time to trigger checking for Loading meeting
-        startTimeHour = int(data['startTimeHour'])
-        startTimeMinute = int(data['startTimeMinute'])
-        rejoinInterval = int(data['rejoinInterval']) if Apptools.check_digit(data['rejoinInterval']) else 0
-        warmUpDuration = int(data['warmUpDuration'])
-        meetLength = int(data['meetLength'])
+        startTimeHour = int(data["startTimeHour"])
+        startTimeMinute = int(data["startTimeMinute"])
+        rejoinInterval = (
+            int(data["rejoinInterval"])
+            if Apptools.check_digit(data["rejoinInterval"])
+            else 0
+        )
+        warmUpDuration = int(data["warmUpDuration"])
+        meetLength = int(data["meetLength"])
 
         startTime = startTimeHour * 60 + startTimeMinute
 
@@ -979,8 +1170,10 @@ class LoadService(tk.Frame):
 
         EndTime = startTime + meetLength + warmUpDuration
         IdealStartTime = startTime - warmUpDuration
-        checkAtTime = [[IdealStartTime, EndTime],
-                       [(scriptStartTime // 60, scriptStartTime % 60)]]
+        checkAtTime = [
+            [IdealStartTime, EndTime],
+            [(scriptStartTime // 60, scriptStartTime % 60)],
+        ]
         if rejoinInterval > 0:
             numberOfMeet = math.ceil(meetLength / int(rejoinInterval))
             for i in range(numberOfMeet):
@@ -993,7 +1186,7 @@ class LoadService(tk.Frame):
         consoleText = "Initialising Launch Service"
         serviceConsole = tk.Label(self, text=consoleText)
         serviceConsole.config(font=("Segoe UI", 8), fg="#E8E8E8", bg="#333333")
-        serviceConsole.grid(row=3, column=0, sticky='nsew')
+        serviceConsole.grid(row=3, column=0, sticky="nsew")
 
         currentTime = datetime.now().time().hour * 60 + datetime.now().time().minute
         if currentTime in range(timeRange[0][0] - 1, timeRange[0][1] + 1):
@@ -1003,15 +1196,15 @@ class LoadService(tk.Frame):
             return True
         return False
 
-    def launchRecordingbyOBS(self, recordMeet='True'):
-        if recordMeet == 'True':
+    def launchRecordingbyOBS(self, recordMeet="True"):
+        if recordMeet == "True":
             lbl = tk.Label(self, text="Launching Recording...")
             lbl.config(font=("Segoe UI", 12), fg="#E8E8E8", bg="#333333")
-            lbl.grid(row=3, column=0, sticky='ew')
+            lbl.grid(row=3, column=0, sticky="ew")
             try:
-                if platform.system() == 'Linux':
+                if platform.system() == "Linux":
                     bashCommand = 'env LIBGL_ALWAYS_SOFTWARE=1 obs --startrecording --multi --scene "Zoom Meet" --minimize-to-tray'
-                elif platform.system() == 'Windows':
+                elif platform.system() == "Windows":
                     bashCommand = 'start /d "C:/Program Files/obs-studio/bin/64bit" obs64.exe --startrecording --multi --scene "Zoom Meet"'
                 else:
                     raise "Unsupported OS"
@@ -1019,12 +1212,12 @@ class LoadService(tk.Frame):
             except Exception as e:
                 messagebox.showerror("Error", e)
 
-    def endOBSRecording(self, recordMeet='True'):
-        if recordMeet == 'True':
+    def endOBSRecording(self, recordMeet="True"):
+        if recordMeet == "True":
             try:
-                if platform.system() == 'Linux':
+                if platform.system() == "Linux":
                     bashCommand = "killall -9 obs"
-                elif platform.system() == 'Windows':
+                elif platform.system() == "Windows":
                     bashCommand = "taskkill /F /IM obs64.exe"
                 else:
                     raise "Unsupported OS"
@@ -1043,12 +1236,13 @@ class AppSettings(tk.Frame):
     def makeWidgets(self, master):
         lbl = tk.Label(self, text="Settings")
         lbl.config(font=("Segoe UI", 30), fg="#E8E8E8", bg="#333333")
-        lbl.grid(row=0, column=0, sticky='ew')
+        lbl.grid(row=0, column=0, sticky="ew")
 
         # Default Recorder + OBS Location + fps + resolution + save dir if manual + mannual third party bash command with reset
         # Display bash cmmand
-        btn = tk.Button(self, text="Go to Home",
-                        command=lambda: master.switch_frame(HomePage))
+        btn = tk.Button(
+            self, text="Go to Home", command=lambda: master.switch_frame(HomePage)
+        )
         btn.config(bg="#1F8EE7", fg="#E8E8E8", bd=0, activebackground="#3297E9")
         btn.grid(row=8, column=0, padx=5, pady=10)
 

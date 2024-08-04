@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "zoom-autorecorder"
+version = "0.1.0"
+description = ""
+authors = ["Lab Rat <dev.frolics@gmail.com>"]
+license = "AGPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pillow = "^10.4.0"
+setuptools = "^72.1.0"
+ttkthemes = "^3.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

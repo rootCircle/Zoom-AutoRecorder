@@ -121,7 +121,17 @@ height="500">](https://github.com/rootCircle/Zoom-AutoRecorder/tree/main/docs)
 [<img src="https://i.ytimg.com/vi/Tu31bdrZyW0/hqdefault.jpg"
      alt="Zoom Recorder | Zoom Meeting Scheduler and Recorder | v0.3Alpha Walk-through | Python"
      height="250">](https://www.youtube.com/watch?v=Tu31bdrZyW0)
-     
+
+### Future Scope
+
+The future of this app includes several key features aimed at enhancing user experience and efficiency. 
+
+- **Meeting Link Sharing:** Users will be able to share meeting links easily across platforms, making it straightforward to access and distribute meeting invites.
+- **Consensus Voting System:** The app will incorporate a voting mechanism to allow users to assess and verify the credibility of meeting links, ensuring that only relevant and high-quality meetings are included.
+- **Automatic Removal of Links:** Meetings with negative votes will be automatically removed from the list, maintaining a curated selection of valuable and verified meetings.
+- **Institution and Batch Filtering:** The app will categorize and filter meeting links based on users' institutions and academic batches, ensuring that only pertinent meetings are displayed.
+- **Student-Specific Aggregation:** A personalized list of meetings will be generated for each student, tailored to their specific needs and schedule.
+
 ### Alternatives
 - Warning: User discretion is required! I don't take any responsibility for any issues faced while using these alternatives.
   They are just for informational purposes only. I have not tested either of these, except for [AutoRecorder](https://github.com/SMazeikis/AutoRecorder).
